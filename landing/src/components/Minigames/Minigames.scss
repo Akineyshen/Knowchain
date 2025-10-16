@@ -1,0 +1,201 @@
+@import '../../styles/variables.scss';
+
+.minigames {
+  padding: 12.5rem 0;
+  position: relative;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 8rem 0;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: rgba(157, 78, 221, 0.1);
+  border: 1px solid rgba(157, 78, 221, 0.2);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  margin-bottom: 2rem;
+  transition: $transition-base;
+
+  &:hover {
+    background: rgba(157, 78, 221, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.badgeIcon {
+  font-size: 1.125rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.25rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.875rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: $color-text-secondary;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1rem;
+  }
+}
+
+.gamesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gameCard {
+  background: $color-bg-card;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: $radius-xl;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  transition: $transition-base;
+  animation: fadeInUp 0.6s ease-out backwards;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--game-color, $color-primary);
+    opacity: 0;
+    transition: $transition-base;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    background: $color-bg-card-hover;
+    border-color: var(--game-color);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .gameIcon {
+      background: var(--game-color);
+      transform: scale(1.1) rotate(-5deg);
+
+      svg {
+        color: white;
+      }
+    }
+
+    .playBtn {
+      background: var(--game-color);
+      border-color: var(--game-color);
+      color: white;
+    }
+  }
+}
+
+.gameIcon {
+  width: 80px;
+  height: 80px;
+  background: rgba(74, 126, 255, 0.1);
+  border-radius: $radius-xl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: $transition-base;
+
+  svg {
+    color: var(--game-color, $color-primary);
+    transition: $transition-base;
+  }
+}
+
+.gameTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: $color-text-primary;
+}
+
+.gameDescription {
+  margin: 0 0 1.5rem;
+  font-size: 1rem;
+  color: $color-text-secondary;
+  line-height: 1.7;
+  flex: 1;
+}
+
+.rewardBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(74, 255, 125, 0.1);
+  border: 1px solid rgba(74, 255, 125, 0.2);
+  border-radius: $radius-full;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.rewardLabel {
+  color: $color-text-secondary;
+}
+
+.rewardAmount {
+  color: #4AFF7D;
+  font-weight: 700;
+}
+
+.playBtn {
+  width: 100%;
+  transition: $transition-base;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

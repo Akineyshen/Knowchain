@@ -1,0 +1,50 @@
+#name: Deploy Landing
+#
+#on:
+#  push:
+#    branches: [ "main" ]
+#    paths:
+#      - 'landing/client/**'
+#      - '.github/workflows/deploy-landing.yml'
+#  workflow_dispatch: {}
+#
+#jobs:
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v4
+#
+#      - name: Setup pnpm
+#        uses: pnpm/action-setup@v4
+#        with:
+#          version: 9
+#
+#      - name: Setup Node
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: '20'
+#          cache: 'pnpm'
+#          cache-dependency-path: landing/client/pnpm-lock.yaml
+#
+#      - name: Install deps (landing)
+#        working-directory: ./landing/client
+#        run: pnpm i --frozen-lockfile
+#
+#      - name: Build (landing)
+#        working-directory: ./landing/client
+#        run: pnpm run build
+#
+#      - name: Deploy landing (knowchain.eu)
+#        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+#        with:
+#          server: ${{ secrets.FTP_HOST }}
+#          username: ${{ secrets.FTP_USERNAME }}
+#          password: ${{ secrets.FTP_PASSWORD }}
+#          protocol: ftps
+#          port: 21
+#          local-dir: ./landing/client/dist/
+#          server-dir: /public_html/
+#          exclude: |
+#            **/.DS_Store
+#            **/Thumbs.db

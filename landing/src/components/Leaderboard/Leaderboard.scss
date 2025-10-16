@@ -1,0 +1,276 @@
+@import '../../styles/variables.scss';
+
+.leaderboard {
+  padding: 12.5rem 0;
+  position: relative;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 8rem 0;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: rgba(255, 107, 157, 0.1);
+  border: 1px solid rgba(255, 107, 157, 0.2);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  margin-bottom: 2rem;
+  transition: $transition-base;
+
+  &:hover {
+    background: rgba(255, 107, 157, 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+.badgeIcon {
+  font-size: 1.125rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+
+  @media (max-width: $breakpoint-tablet) {
+    font-size: 2.25rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1.875rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: $color-text-secondary;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 1rem;
+  }
+}
+
+.leaderboardContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  background: $color-bg-card;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: $radius-xl;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  animation: fadeInUp 0.6s ease-out 0.2s backwards;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+  }
+}
+
+.leaderboardHeader {
+  display: grid;
+  grid-template-columns: 80px 1fr 150px 80px;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 60px 1fr 100px 60px;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+}
+
+.headerItem {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.75rem;
+  }
+}
+
+.leaderboardList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.leaderboardItem {
+  display: grid;
+  grid-template-columns: 80px 1fr 150px 80px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: $radius-lg;
+  transition: $transition-base;
+  animation: fadeInUp 0.6s ease-out backwards;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 60px 1fr 100px 60px;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(74, 126, 255, 0.3);
+    transform: translateX(8px);
+  }
+
+  &.top-1 {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 193, 7, 0.05));
+    border-color: rgba(255, 215, 0, 0.3);
+  }
+
+  &.top-2 {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(169, 169, 169, 0.05));
+    border-color: rgba(192, 192, 192, 0.3);
+  }
+
+  &.top-3 {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1), rgba(184, 115, 51, 0.05));
+    border-color: rgba(205, 127, 50, 0.3);
+  }
+}
+
+.rankCell {
+  display: flex;
+  justify-content: center;
+}
+
+.rankNumber {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  color: $color-text-primary;
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  &.badge-gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+  }
+
+  &.badge-silver {
+    background: linear-gradient(135deg, #C0C0C0, #A9A9A9);
+    color: #000;
+  }
+
+  &.badge-bronze {
+    background: linear-gradient(135deg, #CD7F32, #B8733B);
+    color: #fff;
+  }
+}
+
+.playerCell {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: $breakpoint-mobile) {
+    gap: 0.75rem;
+  }
+}
+
+.playerAvatar {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  background: rgba(74, 126, 255, 0.1);
+  border-radius: 50%;
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+}
+
+.playerName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-text-primary;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.875rem;
+  }
+}
+
+.pointsCell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: $color-text-primary;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 0.875rem;
+  }
+}
+
+.pointsIcon {
+  color: #FFB84D;
+}
+
+.pointsValue {
+  font-variant-numeric: tabular-nums;
+}
+
+.trendCell {
+  display: flex;
+  justify-content: center;
+}
+
+.trendIcon {
+  color: #4AFF7D;
+}
+
+.viewMore {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

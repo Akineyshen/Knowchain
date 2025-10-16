@@ -1,0 +1,278 @@
+@import '../../styles/variables.scss';
+
+.hero {
+  padding: 120px 0 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 100px 0 60px;
+    min-height: auto;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+
+  @media (max-width: $breakpoint-desktop) {
+    grid-template-columns: 1fr;
+    gap: $spacing-2xl;
+    text-align: center;
+  }
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+  animation: fadeInUp 0.8s ease-out;
+
+  @media (max-width: $breakpoint-desktop) {
+    align-items: center;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-md;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-full;
+  backdrop-filter: blur(10px);
+  width: fit-content;
+  font-size: 0.875rem;
+  color: $color-text-secondary;
+}
+
+.emoji {
+  font-size: 1.125rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.1;
+  
+  @media (max-width: $breakpoint-tablet) {
+    br {
+      display: none;
+    }
+  }
+}
+
+.description {
+  max-width: 500px;
+  margin: 0;
+  
+  @media (max-width: $breakpoint-desktop) {
+    max-width: 600px;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  
+  @media (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    width: 100%;
+    
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+.stats {
+  display: flex;
+  gap: $spacing-xl;
+  margin-top: $spacing-lg;
+  
+  @media (max-width: $breakpoint-tablet) {
+    justify-content: center;
+    gap: $spacing-lg;
+  }
+  
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    gap: $spacing-md;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 700;
+  background: $gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: $color-text-muted;
+}
+
+.phoneWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  
+  @media (max-width: $breakpoint-desktop) {
+    order: -1;
+  }
+}
+
+.phoneGlow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(74, 126, 255, 0.3) 0%, transparent 70%);
+  filter: blur(40px);
+  animation: float 3s ease-in-out infinite;
+}
+
+.phone {
+  position: relative;
+  width: 280px;
+  height: 560px;
+  background: linear-gradient(145deg, rgba(30, 38, 62, 0.9), rgba(20, 28, 52, 0.9));
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: float 3s ease-in-out infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 25px;
+    background: rgba(10, 14, 26, 0.9);
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 240px;
+    height: 480px;
+  }
+}
+
+.phoneScreen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #0A0E1A 0%, #050811 100%);
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+}
+
+.phoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-md $spacing-sm;
+  color: $color-text-primary;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.phoneIcons {
+  display: flex;
+  gap: 4px;
+}
+
+.phoneIcon {
+  width: 16px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.phoneContent {
+  padding: $spacing-md;
+}
+
+.balance {
+  background: $color-bg-card;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-md;
+  backdrop-filter: blur(10px);
+}
+
+.balanceLabel {
+  font-size: 0.875rem;
+  color: $color-text-muted;
+  margin-bottom: $spacing-xs;
+}
+
+.balanceValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+}
+
+.balanceChange {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(74, 255, 125, 0.1);
+  color: #4AFF7D;
+  border-radius: $radius-sm;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.chart {
+  width: 100%;
+  height: 120px;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
