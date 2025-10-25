@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { Menu, X } from 'lucide-vue-next'
+  import Button from '@components/Button/Button.vue'
+  import Icon from '@components/Icon/Icon.vue'
 
   const isMobileMenuOpen = ref(false)
 
@@ -9,10 +10,11 @@
   }
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'How it Works', href: '#how-it-works' },
-    { name: 'Levels', href: '#levels' },
-    { name: 'Rewards', href: '#rewards' }
+    { name: 'About us', href: '#about-us' },
+    { name: 'Learn', href: '#learn' },
+    { name: 'Play', href: '#play' },
+    { name: 'Buy KNW', href: '#buyKNW' },
+    { name: 'Roadmap', href: '#roadmap' }
   ]
 </script>
 
@@ -20,32 +22,27 @@
   <header class="header">
     <div class="container">
       <nav class="nav">
-        <!-- Logo -->
-        <div class="logo">
-          <img class="logoIcon" src="/logo_dark.svg"  alt="Knowchain"/>
-          <span class="logoText">KNOWCHAIN</span>
-        </div>
+        <a href="#hero" class="logo" style="text-decoration: none;">
+          <img class="logo-icon" src="/logo_dark.svg" alt="Knowchain Logotype"/>
+          <span class="logo-text">KNOWCHAIN</span>
+        </a>
 
-        <!-- Desktop Navigation -->
         <ul class="navLinks">
           <li v-for="link in navLinks" :key="link.name">
             <a :href="link.href" class="navLink">{{ link.name }}</a>
           </li>
         </ul>
 
-        <!-- CTA Button -->
         <div class="actions">
-          <button class="btn btn-primary">Launch App</button>
+          <Button variant="primary">Launch App</Button>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button class="mobileMenuBtn" @click="toggleMobileMenu">
-          <Menu v-if="!isMobileMenuOpen" :size="24" />
-          <X v-else :size="24" />
+          <Icon name="Menu" :filled="false" v-if="!isMobileMenuOpen" :size="24" />
+          <Icon name="Close" :filled="false" v-else :size="24" />
         </button>
       </nav>
 
-      <!-- Mobile Menu -->
       <div v-if="isMobileMenuOpen" class="mobileMenu">
         <ul class="mobileNavLinks">
           <li v-for="link in navLinks" :key="link.name">
@@ -55,11 +52,11 @@
           </li>
         </ul>
         <div class="mobileActions">
-          <button class="btn btn-primary" style="width: 100%">Launch App</button>
+          <Button variant="primary" style="width: 100%">Launch App</Button>
         </div>
       </div>
     </div>
   </header>
 </template>
 
-<style lang="scss" scoped src="./Header.scss"></style>
+<style lang="scss" scoped src="./Header.scss"/>

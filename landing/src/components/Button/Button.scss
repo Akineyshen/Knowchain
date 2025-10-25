@@ -1,0 +1,50 @@
+@use '@shared/style/main.scss' as shared;
+@import '../../styles/variables.scss';
+@import '../../styles/global.scss';
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: shared.$spacing-md;
+  padding: shared.$spacing-md shared.$spacing-xl;
+  border: none;
+  border-radius: shared.$radius-full;
+  font-size: shared.$font-size-lg;
+  font-weight: shared.$font-weight-semibold;
+  font-family: Onest, serif;
+  cursor: pointer;
+  transition: $transition-base;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &-primary {
+    background: shared.$color-blue-700;
+    color: shared.$color-neutral-100;
+
+    &:hover {
+      box-shadow: 0 10px 30px rgba(74, 126, 255, 0.4);
+      background: shared.$color-blue-400;
+    }
+  }
+
+  &-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: $color-text-primary;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &-outline {
+    background: transparent;
+    color: $color-text-primary;
+    border: 0.15rem solid rgba(255, 255, 255, 0.2);
+
+    &:hover {
+      border-color: shared.$color-blue-700;
+      background: rgba(74, 126, 255, 0.1);
+    }
+  }
+}

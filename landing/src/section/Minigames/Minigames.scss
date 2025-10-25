@@ -1,0 +1,114 @@
+@use '@shared/style/main.scss' as shared;
+@import '../../styles/variables';
+
+.learning {
+  padding: 12.5rem 0;
+  position: relative;
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    padding: 8rem 0;
+  }
+}
+
+/* Two-column hero card */
+.heroCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-areas: 'left right';
+  gap: 2.5rem;
+  padding: 0 3rem;
+  border-radius: shared.$radius-xl;
+  background: $color-bg-card;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 0%, rgba(74, 126, 255, 0.14), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(123, 97, 255, 0.12), transparent 55%),
+    $gradient-card;
+    pointer-events: none;
+  }
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'right' 'left';
+  }
+}
+
+.left {
+  grid-area: left;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.right {
+  grid-area: right;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  padding: 3rem 0;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contentWrap { width: 100%; max-width: 640px; }
+
+/* Headline/description tuned for hero */
+.title {
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: shared.$font-weight-bold;
+  margin-bottom: 1.25rem;
+}
+
+/* New features grid */
+.features {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-top: 1.5rem;
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: $color-text-secondary;
+}
+
+.iconWrap {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: $color-primary;
+}
+
+.featureItem .label { font-weight: 500; color: $color-text-primary; }
+
+/* Image placeholder styles */
+.mockImage,
+.mockPlaceholder {
+  width: 100%;
+  max-width: 360px;
+  object-fit: cover;
+  padding: 2rem 0 0 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

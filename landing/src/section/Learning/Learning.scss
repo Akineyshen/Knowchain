@@ -1,0 +1,105 @@
+@use '@shared/style/main.scss' as shared;
+@import '../../styles/variables';
+
+.learning {
+  padding: 12.5rem 0;
+  position: relative;
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    padding: 8rem 0;
+  }
+}
+
+/* Two-column hero card */
+.heroCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  padding: 0 3rem;
+  border-radius: shared.$radius-xl;
+  background: $color-bg-card;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 0%, rgba(74, 126, 255, 0.14), transparent 45%),
+                radial-gradient(circle at 80% 10%, rgba(123, 97, 255, 0.12), transparent 55%),
+                $gradient-card;
+    pointer-events: none;
+  }
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Badge (kept) */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: rgba(74, 126, 255, 0.1);
+  border: 1px solid rgba(74, 126, 255, 0.2);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: $color-text-secondary;
+  margin-bottom: 2rem;
+  transition: $transition-base;
+
+  &:hover { background: rgba(74, 126, 255, 0.15); transform: translateY(-2px); }
+}
+.badgeIcon { font-size: 1.125rem; }
+
+/* Headline/description tuned for hero */
+.title {
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-weight: shared.$font-weight-bold;
+  margin-bottom: 1rem;
+}
+.description {
+  font-size: 1rem;
+  color: $color-text-secondary;
+  max-width: 46ch;
+  margin: 0 0 2rem 0;
+  line-height: 1.7;
+}
+
+.actions { .btnIcon { margin-left: 0.5rem; } }
+
+/* Image placeholder styles */
+.mockImage,
+.mockPlaceholder {
+  width: 100%;
+  max-width: 360px;
+  object-fit: cover;
+  padding: 2rem 0 0 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

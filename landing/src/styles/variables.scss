@@ -6,7 +6,7 @@ $color-accent: #FF6B9D;
 
 $color-bg-dark: #0A0E1A;
 $color-bg-darker: #050811;
-$color-bg-card: rgba(20, 28, 52, 0.6);
+$color-bg-card: rgba(11, 27, 82, 0.6);
 $color-bg-card-hover: rgba(30, 38, 62, 0.8);
 
 $color-text-primary: #FFFFFF;
@@ -18,32 +18,9 @@ $gradient-primary: linear-gradient(135deg, #4A7EFF 0%, #7B61FF 100%);
 $gradient-hero: radial-gradient(circle at 50% 0%, rgba(74, 126, 255, 0.15) 0%, transparent 50%);
 $gradient-card: linear-gradient(180deg, rgba(74, 126, 255, 0.05) 0%, transparent 100%);
 
-// Spacing
-$spacing-xs: 0.5rem;      // 8px
-$spacing-sm: 1rem;        // 16px
-$spacing-md: 1.5rem;      // 24px
-$spacing-lg: 2rem;        // 32px
-$spacing-xl: 3rem;        // 48px
-$spacing-2xl: 4rem;       // 64px
-$spacing-3xl: 6rem;       // 96px
-$spacing-section: 12.5rem; // 200px - spacing between sections
-
-// Border Radius
-$radius-sm: 8px;
-$radius-md: 12px;
-$radius-lg: 16px;
-$radius-xl: 24px;
-$radius-full: 9999px;
-
 // Transitions
 $transition-base: all 0.3s ease;
 $transition-fast: all 0.15s ease;
-
-// Breakpoints
-$breakpoint-mobile: 480px;
-$breakpoint-tablet: 768px;
-$breakpoint-desktop: 1024px;
-$breakpoint-wide: 1440px;
 
 // Container
 $container-max-width: 1280px;

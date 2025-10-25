@@ -1,0 +1,110 @@
+@use '@shared/style/main.scss' as shared;
+
+.about {
+  padding: 12.5rem 0;
+  position: relative;
+
+  @media (max-width: shared.$breakpoint-tablet) {
+    padding: 8rem 0;
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.title {
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  color: shared.$color-text-secondary;
+  line-height: 1.7;
+
+  @media (max-width: shared.$breakpoint-mobile) {
+    font-size: 1rem;
+  }
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+
+  @media (max-width: shared.$breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureCard {
+  background: shared.$color-surface-light;
+  border: 1px solid shared.$color-neutral-700;
+  border-radius: shared.$radius-xl;
+  padding: 2.5rem;
+  backdrop-filter: blur(20px);
+  transition: shared.$transition-base;
+  animation: fadeInUp 0.6s ease-out backwards;
+
+  &:hover {
+    transform: translateY(-8px);
+    background: shared.$color-surface;
+    border-color: rgba(74, 126, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(74, 126, 255, 0.15);
+
+    .featureIcon {
+      background: shared.$color-blue-700;
+      transform: scale(1.1) rotate(-5deg);
+
+      svg {
+        color: white;
+      }
+    }
+  }
+}
+
+.featureIcon {
+  width: 70px;
+  height: 70px;
+  background: rgba(74, 126, 255, 0.1);
+  border-radius: shared.$radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: shared.$transition-base;
+
+  svg {
+    color: shared.$color-blue-700;
+    transition: shared.$transition-base;
+  }
+}
+
+.featureTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: shared.$color-text-primary;
+}
+
+.featureDescription {
+  margin: 0;
+  font-size: 1rem;
+  color: shared.$color-text-secondary;
+  line-height: 1.7;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
