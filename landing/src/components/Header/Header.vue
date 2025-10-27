@@ -11,9 +11,8 @@
 
   const navLinks = [
     { name: 'About us', href: '#about-us' },
-    { name: 'Learn', href: '#learn' },
-    { name: 'Play', href: '#play' },
-    { name: 'Buy KNW', href: '#buyKNW' },
+    { name: 'Learn', href: '#learning' },
+    { name: 'Play', href: '#minigames' },
     { name: 'Roadmap', href: '#roadmap' }
   ]
 </script>
@@ -23,7 +22,7 @@
     <div class="container">
       <nav class="nav">
         <a href="#hero" class="logo" style="text-decoration: none;">
-          <img class="logo-icon" src="/logo_dark.svg" alt="Knowchain Logotype"/>
+          <img class="logo-icon" src="/logo/logo_dark.svg" alt="Knowchain Logotype"/>
           <span class="logo-text">KNOWCHAIN</span>
         </a>
 

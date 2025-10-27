@@ -12,6 +12,7 @@ export { default as Minigames } from './games/Minigames.vue'
 // Social
 export { default as GitHub } from './social/GitHub.vue'
 export { default as Telegram } from './social/Telegram.vue'
+export { default as X } from './social/X.vue'
 
 // Arrow
 export { default as UpRightCircle } from './arrow/UpRightCircle.vue'

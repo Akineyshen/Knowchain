@@ -4,6 +4,7 @@
   const socialLinks = [
     { icon: 'GitHub', href: 'https://github.com/Akineyshen/Knowchain', label: 'GitHub' },
     { icon: 'Telegram', href: 'https://github.com/Akineyshen/Knowchain', label: 'Telegram' },
+    { icon: 'X', href: 'https://x.com', label: 'X' },
   ]
 </script>
 
@@ -13,7 +14,7 @@
       <div class="footerMain">
         <div class="footerBrand">
           <div class="logo">
-            <img class="logoIcon" src="/logo_dark.svg" alt="Knowchain"/>
+            <img class="logoIcon" src="/logo/logo_dark.svg" alt="Knowchain"/>
             <span class="logoText">KNOWCHAIN</span>
           </div>
           <p class="description">

@@ -28,7 +28,7 @@
         </div>
 
         <div class="right">
-          <img class="mockImage" src="../../assets/image/learning.png" alt="Learning mockup placeholder" />
+          <img class="mockImage" src="../../assets/image/phone/learning.png" alt="Learning mockup placeholder" />
         </div>
       </div>
     </div>

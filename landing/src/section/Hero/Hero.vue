@@ -6,8 +6,6 @@
 
   const isVideoModalOpen = ref(false)
 
-  const videoUrl = 'https://www.youtube.com/embed/IyqqPUjpS8U?si=EIaVdlfqM9BxZrEr'
-
   const openVideoModal = () => {
     isVideoModalOpen.value = true
   }
@@ -51,7 +49,6 @@
 
     <VideoModal
         :is-open="isVideoModalOpen"
-        :video-url="videoUrl"
         title="Knowchain Intro"
         @close="closeVideoModal"
     />

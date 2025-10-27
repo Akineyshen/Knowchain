@@ -7,7 +7,7 @@
     <div class="container">
       <div class="heroCard">
         <div class="left">
-          <img class="mockImage" src="../../assets/image/minigames.png" alt="App mockup" />
+          <img class="mockImage" src="../../assets/image/phone/minigames.png" alt="App mockup" />
         </div>
 
         <div class="right">
@@ -18,21 +18,15 @@
 
             <ul class="features">
               <li class="featureItem">
-                <span class="iconWrap" aria-hidden="true">
-                  <Icon name="Roulette" />
-                </span>
+                <img class="iconWrap" src="../../assets/image/minigames/roulette.png" alt="Roulette"/>
                 <span class="label">Roulette</span>
               </li>
               <li class="featureItem">
-                <span class="iconWrap" aria-hidden="true">
-                  <Icon name="Pairs" />
-                </span>
+                <img class="iconWrap" src="../../assets/image/minigames/pairs.png" alt="Pairs"/>
                 <span class="label">Pairs</span>
               </li>
               <li class="featureItem">
-                <span class="iconWrap" aria-hidden="true">
-                  <Icon name="Clicker" />
-                </span>
+                <img class="iconWrap" src="../../assets/image/minigames/clicker.png" alt="Pairs"/>
                 <span class="label">Clicker</span>
               </li>
               <li class="featureItem">
