@@ -2,13 +2,14 @@
 // COLORS
 // ==========================================
 
-// BASE COLORS
+// BASE
 $color-primary: #3b82f6;
 $color-primary-light: #60a5fa;
 $color-secondary: #06b6d4;
 $color-accent: #0ea5e9;
 
-$color-bg-dark: #030814;
+$color-bg-dark: rgba(10, 14, 26, 0.8);
+
 $color-bg-darker: #020510;
 $color-surface: rgba(17, 24, 39, 0.6);
 $color-surface-light: rgba(31, 41, 55, 0.5);
@@ -16,6 +17,8 @@ $color-surface-light: rgba(31, 41, 55, 0.5);
 $color-text-primary: #ffffff;
 $color-text-secondary: #d1d5db;
 $color-text-muted: #9ca3af;
+$color-bg-card: rgba(11, 27, 82, 0.6);
+$gradient-card: linear-gradient(180deg, rgba(74, 126, 255, 0.05) 0%, transparent 100%);
 
 $color-border: rgba(255, 255, 255, 0.1);
 $color-border-light: rgba(255, 255, 255, 0.05);
@@ -38,7 +41,7 @@ $color-blue-700: #005CF1;
 $color-blue-600: #2563EB;
 $color-blue-500: #3B82F6;
 $color-blue-400: #1771F1;
-$color-blue-300: #3374ED;
+$color-blue-300: #3b82f6;
 
 // GREEN
 
@@ -46,3 +49,5 @@ $color-blue-300: #3374ED;
 // Glow colors
 $glow-blue: rgba(59, 130, 246, 0.4);
 $glow-cyan: rgba(6, 182, 212, 0.3);
+
+$gradient-hero: radial-gradient(circle at 50% 0%, rgba(0, 81, 255, 0.25) 0%, transparent 50%);
