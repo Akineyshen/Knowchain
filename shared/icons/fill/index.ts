@@ -15,7 +15,7 @@ export { default as Telegram } from './social/Telegram.vue'
 export { default as X } from './social/X.vue'
 
 // Arrow
-export { default as UpRightCircle } from './arrow/UpRightCircle.vue'
+export { default as UpRightCircle } from './arrows/UpRightCircle.vue'
 
 // Education
 export { default as AcademicCap } from './education/AcademicCap.vue'
