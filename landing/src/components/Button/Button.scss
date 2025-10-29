@@ -1,0 +1,47 @@
+@use '@shared/style/main.scss' as shared;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: shared.$spacing-md;
+  padding: shared.$spacing-md shared.$spacing-xl;
+  border: none;
+  border-radius: shared.$radius-full;
+  font-size: shared.$font-size-lg;
+  font-weight: shared.$font-weight-semibold;
+  font-family: Onest, serif;
+  cursor: pointer;
+  transition: shared.$transition-base;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &-primary {
+    background: shared.$color-blue-700;
+    color: shared.$color-neutral-100;
+
+    &:hover {
+      background: shared.$color-blue-500;
+    }
+  }
+
+  &-secondary {
+    background: rgba(255, 255, 255, 0.5);
+    color: shared.$color-neutral-100;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  &-outline {
+    background: rgba(89, 89, 89, 0.2);
+    color: shared.$color-neutral-100;
+    border: 0.15rem solid rgba(255, 255, 255, 0.5);
+
+    &:hover {
+      border-color: shared.$color-blue-700;
+      background: rgba(74, 126, 255, 0.1);
+    }
+  }
+}
