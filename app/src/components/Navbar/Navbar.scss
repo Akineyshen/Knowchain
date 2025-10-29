@@ -1,0 +1,125 @@
+@use '@shared/style/main.scss' as shared;
+
+.navbar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(16px, env(safe-area-inset-bottom));
+
+  width: calc(100% - 32px);
+  max-width: 680px;
+
+  padding: 13.5px 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 29px;
+
+  border-radius: 32px;
+  background: rgba(30, 35, 50, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+          0 24px 48px rgba(0, 0, 0, 0.6),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 100;
+}
+
+.navbar .tab {
+  position: relative;
+  flex: 1 1 0; /* Равномерное распределение по колонкам */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+
+  color: rgba(156, 163, 175, 0.85);
+  font-size: clamp(11px, 2.5vw, 13px);
+  font-weight: shared.$font-weight-medium;
+  line-height: 1.2;
+
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar .tab svg {
+  position: relative;
+  z-index: 1;
+  color: currentColor;
+  transition: transform 0.25s ease;
+
+  /* Адаптивный размер иконок */
+  width: clamp(20px, 6vw, 24px);
+  height: clamp(20px, 6vw, 24px);
+}
+
+.navbar .tab .label {
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+/* Hover state */
+.navbar .tab:hover {
+  color: rgba(209, 213, 219, 0.95);
+}
+
+.navbar .tab:hover svg {
+  transform: translateY(-2px);
+}
+
+/* Active state */
+.navbar .tab.active {
+  color: #3b82f6;
+}
+
+.navbar .tab.active svg {
+  fill: #3b82f6;
+  color: #3b82f6;
+}
+
+.navbar .tab.active .label {
+  opacity: 1;
+  color: #3b82f6;
+}
+
+/* Адаптив для планшетов */
+@media (min-width: 768px) {
+  .navbar {
+    width: calc(100% - 64px); /* 32px margin с каждой стороны */
+    padding: 16px 32px;
+    gap: 16px;
+  }
+
+  .navbar .tab {
+    gap: 6px;
+    padding: 12px 8px;
+  }
+}
+
+/* Адаптив для десктопов */
+@media (min-width: 1024px) {
+  .navbar {
+    max-width: 720px;
+    padding: 18px 36px;
+    gap: 20px;
+  }
+
+  .navbar .tab {
+    gap: 8px;
+    padding: 14px 12px;
+  }
+}
+
+/* Safe area support */
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .navbar {
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}

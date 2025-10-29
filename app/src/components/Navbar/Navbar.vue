@@ -1,81 +1,45 @@
 <script setup lang="ts">
-const props = defineProps<{ onConnect?: () => void }>()
+import { ref } from 'vue'
+import Icon from "../Icon/Icon.vue"
+import './Navbar.scss'
+
+const tabs = [
+  { key: 'home', label: 'Home', icon: 'home' },
+  { key: 'learn', label: 'Learn', icon: 'Book' },
+  { key: 'games', label: 'Games', icon: 'Play' },
+  { key: 'friends', label: 'Friends', icon: 'Users' },
+] as const
+
+type TabKey = 'home' | 'learn' | 'games' | 'friends'
+const active = ref<TabKey>('home')
+
+function onTabClick(key: TabKey) {
+  active.value = key
+}
 </script>
 
 <template>
-  <header class="navbar">
-    <div class="navbar__left">
-      <div class="avatar">
-        <img src="https://i.pravatar.cc/64?img=5" alt="avatar" />
-      </div>
-    </div>
+  <nav class="navbar" role="tablist" aria-label="Main Navigation">
+    <button
+        v-for="t in tabs"
+        :key="t.key"
+        class="tab"
+        :class="{ active: t.key === active }"
+        role="tab"
+        :aria-selected="t.key === active"
+        @click="onTabClick(t.key)"
+    >
+      <!-- Home icon (house) -->
+      <svg v-if="t.key === 'home'" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.5 21V15.5C9.5 15.0858 9.83579 14.75 10.25 14.75H13.75C14.1642 14.75 14.5 15.0858 14.5 15.5V21M11.3856 3.42229L4.13559 9.2973C3.74435 9.60611 3.5 10.0736 3.5 10.5708V19.25C3.5 20.0784 4.17157 20.75 5 20.75H19C19.8284 20.75 20.5 20.0784 20.5 19.25V10.5708C20.5 10.0736 20.2556 9.60611 19.8644 9.2973L12.6144 3.42229C12.2556 3.13924 11.7444 3.13924 11.3856 3.42229Z"/>
+      </svg>
 
-    <button class="connect" @click="props.onConnect?.()">
-      <span class="icon">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-          <path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h10a2 2 0 0 1 2 2v2h-3.5a3.5 3.5 0 0 0 0 7H18v2a2 2 0 0 1-2 2H6a2.5 2.5 0 0 1-2.5-2.5v-10Z" stroke="currentColor" stroke-width="1.5"/>
-          <rect x="14.5" y="10" width="7" height="6" rx="2.5" fill="currentColor" opacity="0.25"/>
-        </svg>
-      </span>
-      Connect wallet
-    </button>
+      <!-- Other icons from shared -->
+      <Icon v-else-if="t.key === 'learn'" name="Book" :filled="false" width="24" height="24" />
+      <Icon v-else-if="t.key === 'games'" name="Play" :filled="true" width="24" height="24" />
+      <Icon v-else-if="t.key === 'friends'" name="Users" :filled="false" width="24" height="24" />
 
-    <button class="settings" aria-label="settings">
-      <span class="gear">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M19.4 8.5 21 7l-2-3-2 .7a7.97 7.97 0 0 0-2.7-1.1L14 1h-4l-.3 2.6a7.97 7.97 0 0 0-2.7 1.1l-2-.7-2 3 1.6 1.5c-.15.5-.25 1.02-.3 1.55-.05.53-.05 1.07 0 1.6l-1.6 1.5 2 3 2-.7c.83.52 1.75.9 2.7 1.1L10 23h4l.3-2.6c.95-.2 1.87-.58 2.7-1.1l2 .7 2-3-1.6-1.5c.05-.53.05-1.07 0-1.6-.05-.53-.15-1.05-.3-1.55Z" stroke="currentColor" stroke-width="1.2" opacity="0.4"/>
-        </svg>
-      </span>
+      <span class="label">{{ t.label }}</span>
     </button>
-  </header>
+  </nav>
 </template>
-
-<style lang="scss" scoped>
-@use '../../../shared/style/main.scss' as *;
-
-.navbar {
-  position: sticky;
-  top: 0;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 16px 20px;
-}
-
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  overflow: hidden;
-  box-shadow: 0 0 0 2px $color-border-light, 0 6px 18px rgba(0,0,0,.3);
-  img { width: 100%; height: 100%; display: block; }
-}
-
-.connect {
-  justify-self: center;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  color: #fff;
-  background: radial-gradient(100% 100% at 0% 0%, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 35%),
-  linear-gradient(180deg, $color-blue-500, $color-blue-600);
-  border: 1px solid rgba(255,255,255,.12);
-  box-shadow: 0 8px 24px rgba(59,130,246,.35), inset 0 0 0 1px rgba(255,255,255,.08);
-  border-radius: 20px;
-  font-weight: 600;
-}
-
-.settings {
-  justify-self: end;
-  width: 44px; height: 44px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid $color-border;
-  display: grid; place-items: center;
-  color: $color-text-primary;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.04);
-}
-
-</style>
