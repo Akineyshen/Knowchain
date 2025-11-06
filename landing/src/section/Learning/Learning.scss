@@ -75,13 +75,13 @@
 
 /* Headline/description tuned for hero */
 .title {
-  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
   font-weight: shared.$font-weight-bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .description {
-  font-size: 1rem;
-  color: shared.$color-neutral-100;
+  font-size: shared.$font-size-xl;
+  color: shared.$color-neutral-300;
   max-width: 46ch;
   margin: 0 0 2rem 0;
   line-height: 1.7;

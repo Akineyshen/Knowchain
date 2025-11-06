@@ -1,51 +1,68 @@
 <script setup lang="ts">
-  import Icon from '@components/Icon/Icon.vue'
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-  const features = [
-    {
-      icon: 'Book',
-      title: 'Learning',
-      description: 'Dive into the world of cryptocurrencies through interactive lessons and tasks'
-    },
-    {
-      icon: 'Star',
-      title: 'Rewards',
-      description: 'Earn KNW tokens, exchange them, or withdraw them to external wallets'
-    },
-    {
-      icon: 'Users',
-      title: 'Community',
-      description: 'Invite friends and compete in leaderboards.'
-    },
-  ]
+const { t } = useI18n()
+
+const isModalOpen = ref(false)
+const videoUrl = 'https://www.youtube.com/embed/IyqqPUjpS8U?si=h-_EHm26vFLmdUuT&rel=0&modestbranding=1&color=white&iv_load_policy=3'
+
+const openModal = () => {
+  isModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+  document.body.style.overflow = 'auto'
+}
 </script>
 
 <template>
   <section id="about-us" class="about">
     <div class="container">
-      <div class="header">
-        <h2 class="title">About us</h2>
-        <p class="subtitle">
-          Educational app, designed as a game, makes learning about cryptocurrencies engaging and accessible.
-          We simplify complex blockchain concepts by blending education with gamification.
-        </p>
-      </div>
+      <div class="content-wrapper">
+        <div class="text-content">
+          <div class="badge">{{ t('aboutUs.badge') }}</div>
+          <h2 class="title">{{ t('aboutUs.title') }}</h2>
+          <p class="subtitle">{{ t('aboutUs.description') }}</p>
+        </div>
 
-      <div class="features">
-        <div
-          v-for="(feature, index) in features"
-          :key="index"
-          class="featureCard"
-          :style="{ animationDelay: `${index * 0.15}s` }"
-        >
-          <div class="featureIcon">
-            <Icon :name="feature.icon" :filled="false" :size="32" />
+        <div class="video-preview" @click="openModal">
+          <div class="video-thumbnail">
+            <div class="play-button">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="40" fill="#079BFF" opacity="0.9"/>
+                <path d="M32 25L55 40L32 55V25Z" fill="white"/>
+              </svg>
+            </div>
           </div>
-          <h3 class="featureTitle">{{ feature.title }}</h3>
-          <p class="featureDescription">{{ feature.description }}</p>
         </div>
       </div>
     </div>
+
+    <!-- Модальное окно для видео -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div v-if="isModalOpen" class="modal-overlay" @click="closeModal">
+          <div class="modal-content" @click.stop>
+            <button class="close-button" @click="closeModal">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <div class="video-container">
+              <iframe
+                  :src="videoUrl"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+              />
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </section>
 </template>
 

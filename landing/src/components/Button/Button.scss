@@ -16,21 +16,20 @@
   white-space: nowrap;
 
   &-primary {
-    background: shared.$color-blue-700;
+    background: shared.$gradient-primary;
     color: shared.$color-neutral-100;
 
     &:hover {
-      background: shared.$color-blue-500;
+      filter: brightness(1.125);
     }
   }
 
   &-secondary {
-    background: rgba(255, 255, 255, 0.5);
+    background: shared.$glow-neutral;
     color: shared.$color-neutral-100;
-    backdrop-filter: blur(10px);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
+      background: shared.$color-neutral-700;
     }
   }
 

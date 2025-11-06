@@ -1,19 +1,26 @@
 <script setup lang="ts">
   import { ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
   import Button from '@components/Button/Button.vue'
   import Icon from '@components/Icon/Icon.vue'
+  import LanguageSelector from "@components/LanguageSelector/LanguageSelector.vue";
 
+  const { t } = useI18n()
   const isMobileMenuOpen = ref(false)
 
   const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value
   }
 
+  const openApp = () => {
+    window.location.href = 'https://app.knowchain.eu/'
+  }
+
   const navLinks = [
-    { name: 'About us', href: '#about-us' },
-    { name: 'Learn', href: '#learning' },
-    { name: 'Play', href: '#minigames' },
-    { name: 'Roadmap', href: '#roadmap' }
+    { key: 'header.aboutUs', href: '#about-us' },
+    { key: 'header.benefits', href: '#benefits' },
+    { key: 'header.learn', href: '#learning' },
+    { key: 'header.play', href: '#minigames' },
   ]
 </script>
 
@@ -27,13 +34,14 @@
         </a>
 
         <ul class="navLinks">
-          <li v-for="link in navLinks" :key="link.name">
-            <a :href="link.href" class="navLink">{{ link.name }}</a>
+          <li v-for="link in navLinks" :key="link.key">
+            <a :href="link.href" class="navLink">{{ t(link.key) }}</a>
           </li>
         </ul>
 
         <div class="actions">
-          <Button variant="primary">Launch App</Button>
+          <LanguageSelector class="language-selector"/>
+          <Button variant="primary" @click="openApp">{{ t('header.launchApp') }}</Button>
         </div>
 
         <button class="mobileMenuBtn" @click="toggleMobileMenu">
@@ -44,15 +52,13 @@
 
       <div v-if="isMobileMenuOpen" class="mobileMenu">
         <ul class="mobileNavLinks">
-          <li v-for="link in navLinks" :key="link.name">
+          <li v-for="link in navLinks" :key="link.key">
             <a :href="link.href" class="mobileNavLink" @click="toggleMobileMenu">
-              {{ link.name }}
+              {{ t(link.key) }}
             </a>
           </li>
         </ul>
-        <div class="mobileActions">
-          <Button variant="primary" style="width: 100%">Launch App</Button>
-        </div>
+        <LanguageSelector />
       </div>
     </div>
   </header>

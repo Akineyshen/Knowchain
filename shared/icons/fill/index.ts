@@ -17,5 +17,10 @@ export { default as X } from './social/X.vue'
 // Arrow
 export { default as UpRightCircle } from './arrows/UpRightCircle.vue'
 
+// Flags
+export { default as PL } from './flags/PL.vue'
+export { default as RU } from './flags/RU.vue'
+export { default as EN } from './flags/EN.vue'
+
 // Education
 export { default as AcademicCap } from './education/AcademicCap.vue'

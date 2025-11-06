@@ -1,0 +1,114 @@
+@use "@shared/style/main.scss" as shared;
+
+
+.language-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.language-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: shared.$spacing-md shared.$spacing-sm;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid shared.$color-neutral-600;
+  border-radius: shared.$radius-xl;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .flag-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .name {
+    font-family: Onest, serif;
+    font-size: shared.$font-size-sm;
+    color: shared.$color-neutral-100;
+  }
+
+  .arrow {
+    transition: transform 0.3s ease;
+    color: rgba(255, 255, 255, 0.8);
+
+    &.open {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  left: -15%;
+  min-width: 9rem;
+  background: rgba(20, 20, 30, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: shared.$radius-md;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: shared.$spacing-sm;
+  width: 100%;
+  padding: shared.$spacing-sm shared.$spacing-md;
+  background: transparent;
+  border: none;
+  font-family: Onest, serif;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  color: shared.$color-neutral-100;
+  text-align: left;
+
+  &:hover {
+    background: shared.$color-neutral-700;
+  }
+
+  &.active {
+    background: shared.$color-blue-300;
+    color: #fff;
+  }
+
+  .flag {
+    font-size: 18px;
+  }
+
+  .name {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+.dropdown-enter-active,
+.dropdown-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dropdown-enter-from {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdown-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+@media (max-width: shared.$breakpoint-mobile) {
+  .dropdown {
+    top: calc(100% + 2rem);
+    min-width: 8rem;
+  }
+}

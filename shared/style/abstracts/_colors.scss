@@ -2,13 +2,13 @@
 // COLORS
 // ==========================================
 
-// BASE
+// Base
 $color-primary: #3b82f6;
 $color-primary-light: #60a5fa;
 $color-secondary: #06b6d4;
 $color-accent: #0ea5e9;
 
-$color-bg-dark: rgba(10, 14, 26, 0.8);
+$color-bg-dark: rgba(10, 14, 26, 0.9);
 
 $color-bg-darker: #020510;
 $color-surface: rgba(17, 24, 39, 0.6);
@@ -114,8 +114,16 @@ $color-yellow-800: #854d0e;
 $color-yellow-900: #713f12;
 $color-yellow-950: #422006;
 
+// Gradient
+$gradient-primary: linear-gradient(135deg, #0894EE 0%, #005CF1 100%);
+$gradient-primary-hover: linear-gradient(135deg, #0797FF 0%, #0797FF 100%);;
+
+
+
+
 // Glow colors
 $glow-blue: rgba(59, 130, 246, 0.4);
 $glow-cyan: rgba(6, 182, 212, 0.3);
+$glow-neutral: rgba(64, 64, 64, 0.6);
 
-$gradient-hero: radial-gradient(circle at 50% 0%, rgba(0, 81, 255, 0.25) 0%, transparent 50%);
+$gradient-hero: radial-gradient(circle at 50% 0%, rgba(0, 85, 255, 0.3) 0%, transparent 50%);
