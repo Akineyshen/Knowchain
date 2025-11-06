@@ -1,5 +1,7 @@
 <script setup lang="ts">
-  import Icon from "../../components/Icon/Icon.vue"
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
 </script>
 
 <template>
@@ -12,28 +14,19 @@
 
         <div class="right">
           <div class="contentWrap">
-            <h2 class="title">
-              Play between lessons and earn <span class="text-gradient">extra KNW</span>
-            </h2>
-
+            <h2 class="title">{{ t('play.title') }}</h2>
             <ul class="features">
               <li class="featureItem">
                 <img class="iconWrap" src="../../assets/image/minigames/roulette.png" alt="Roulette"/>
-                <span class="label">Roulette</span>
+                <span class="label">{{ t('play.roulette') }}</span>
               </li>
               <li class="featureItem">
                 <img class="iconWrap" src="../../assets/image/minigames/pairs.png" alt="Pairs"/>
-                <span class="label">Pairs</span>
+                <span class="label">{{ t('play.pairs') }}</span>
               </li>
               <li class="featureItem">
                 <img class="iconWrap" src="../../assets/image/minigames/clicker.png" alt="Pairs"/>
-                <span class="label">Clicker</span>
-              </li>
-              <li class="featureItem">
-                <span class="iconWrap" aria-hidden="true">
-                  <Icon name="Minigames" />
-                </span>
-                <span class="label">and others</span>
+                <span class="label">{{ t('play.clicker') }}</span>
               </li>
             </ul>
           </div>

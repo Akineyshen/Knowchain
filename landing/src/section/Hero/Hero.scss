@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12rem 0 10rem;
+  padding: 12rem 0 8rem;
   overflow: hidden;
 
   @media (max-width: shared.$breakpoint-mobile) {
@@ -21,59 +21,52 @@
   animation: fadeInUp 1s ease-out;
 }
 
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: rgba(0, 79, 255, 0.2);
-  border: 1px solid shared.$color-blue-400;
-  border-radius: 2rem;
-  font-size: shared.$font-size-sm;
-  font-weight: shared.$font-weight-regular;
-  color: shared.$color-neutral-100;
-  margin-bottom: 2rem;
-  transition: shared.$transition-base;
-
-  @media (max-width: shared.$breakpoint-mobile) {
-    font-size: 0.8125rem;
-    padding: 0.5rem 1rem;
-  }
-}
-
-.badgeIcon {
-  font-size: 1.125rem;
-}
-
 .title {
-  font-size: shared.$font-size-7xl;
-  font-weight: shared.$font-weight-extrabold;
+  font-size: shared.$font-size-8xl;
+  font-weight: shared.$font-weight-bold;
   line-height: 1.2;
+  letter-spacing: 0.05rem;
   color: shared.$color-neutral-100;
-  margin: 0 0 1.5rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 5rem;
 
   @media (max-width: shared.$breakpoint-tablet) {
     font-size: 3rem;
   }
 
   @media (max-width: shared.$breakpoint-mobile) {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: shared.$font-size-5xl;
+    margin-bottom: 3.5rem;
   }
 }
 
-.description {
+.badge {
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
   font-size: shared.$font-size-xl;
-  line-height: 1.7;
-  color: shared.$color-neutral-300;
-  max-width: 700px;
-  font-weight: shared.$font-weight-light;
-  margin: 0 auto 3rem;
+  font-weight: shared.$font-weight-medium;
+  background: shared.$gradient-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  transition: shared.$transition-base;
 
   @media (max-width: shared.$breakpoint-mobile) {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.subtitle {
+  font-size: shared.$font-size-2xl;
+  font-weight: shared.$font-weight-light;
+  color: shared.$color-neutral-100;
+  margin: 0 0 1rem;
+
+  .text-gradient {
+    background: shared.$gradient-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
@@ -83,6 +76,10 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+
+  .button-secondary {
+    padding: 1.1rem 3rem;
+  }
 
   @media (max-width: shared.$breakpoint-mobile) {
     flex-direction: column;
@@ -99,7 +96,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(100px);
   }
   to {
     opacity: 1;

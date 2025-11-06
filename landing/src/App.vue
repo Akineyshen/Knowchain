@@ -2,9 +2,9 @@
   import Header from '@components/Header/Header.vue'
   import Hero from './section/Hero/Hero.vue'
   import About from './section/About/About.vue'
+  import Benefits from './section/Benefits/Benefits.vue'
   import Learning from './section/Learning/Learning.vue'
   import Minigames from './section/Minigames/Minigames.vue'
-  import Roadmap from './section/Roadmap/Roadmap.vue'
   import Prefooter from './section/Prefooter/Prefooter.vue'
   import Footer from '@components/Footer/Footer.vue'
 </script>
@@ -15,9 +15,9 @@
     <main>
       <Hero />
       <About />
+      <Benefits />
       <Learning />
       <Minigames />
-      <Roadmap />
       <Prefooter />
     </main>
     <Footer />

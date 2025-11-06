@@ -1,0 +1,49 @@
+{
+  "header": {
+    "aboutUs": "About us",
+    "benefits": "Benefits",
+    "learn": "Learn",
+    "play": "Play",
+    "launchApp": "Launch App"
+  },
+  "hero": {
+    "title_start": "Your crypto journey",
+    "title_end": "start here",
+    "subtitle": "the gamified way to master crypto",
+    "buttonGetStarted": "Get Started",
+    "buttonLearnMore": "Learn More"
+  },
+  "aboutUs": {
+    "badge": "ABOUT US",
+    "title": "World of crypto with Knowchain",
+    "description": "Educational app, designed as a game, makes learning about cryptocurrencies engaging and accessible. We simplify complex blockchain concepts by blending education with gamification."
+  },
+  "benefits": {
+    "badge": "BENEFITS",
+    "title": "Everything you need — in one app.",
+    "cardLearningTitle": "Learning",
+    "cardLearningDescription": "Dive into the world of cryptocurrencies through interactive lessons and tasks",
+    "cardRewardsTitle": "Rewards",
+    "cardRewardsDescription": "Earn KNW tokens, exchange them, or withdraw them to external wallets",
+    "cardCommunityTitle": "Community",
+    "cardCommunityDescription": "Invite friends and compete in leaderboards"
+  },
+  "learn": {
+    "title": "Begin your journey in digital finance",
+    "description": "Complete tasks to earn KNW tokens and unlock new levels",
+    "button": "Try Knowchain"
+  },
+  "play": {
+    "title": "Play between lessons and earn KNW",
+    "roulette": "Roulette",
+    "pairs": "Pairs",
+    "clicker": "Clicker"
+  },
+  "prefooter": {
+    "title": "Take the first step toward confident investing in digital assets",
+    "button": "Launch Knowchain"
+  },
+  "footer": {
+    "description": "Our mission is to raise awareness of digital assets by offering an accessible and captivating way to learn."
+  }
+}

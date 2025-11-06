@@ -5,12 +5,8 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: max(16px, env(safe-area-inset-bottom));
-
   width: calc(100% - 32px);
   max-width: 680px;
-
-  padding: 13.5px 42px;
-
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
