@@ -23,6 +23,9 @@ $gradient-card: linear-gradient(180deg, rgba(74, 126, 255, 0.05) 0%, transparent
 $color-border: rgba(255, 255, 255, 0.1);
 $color-border-light: rgba(255, 255, 255, 0.05);
 
+// Background
+$backgroundNavbar: #121423;
+
 // Neutral
 $color-neutral-50: #FAFAFA;
 $color-neutral-100: #F5F5F5;
@@ -119,7 +122,8 @@ $gradient-primary: linear-gradient(135deg, #0894EE 0%, #005CF1 100%);
 $gradient-primary-hover: linear-gradient(135deg, #0797FF 0%, #0797FF 100%);;
 
 
-
+// Alpha
+$color-alpha-100: rgba(64, 64, 64, 0.30);
 
 // Glow colors
 $glow-blue: rgba(59, 130, 246, 0.4);

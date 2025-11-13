@@ -1,0 +1,66 @@
+@use '@shared/style/main.scss' as shared;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  align-content: center;
+  font-family: shared.$font-primary;
+  font-size: shared.$font-size-base;
+  font-weight: shared.$font-weight-medium;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+
+  &.is-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  &.is-loading {
+    pointer-events: none;
+  }
+
+  /* Variants */
+  &.primary {
+    background: shared.$color-blue-700;
+    color: shared.$color-neutral-50;
+    font-weight: shared.$font-weight-medium;
+    font-size: shared.$font-size-lg;
+    border-radius: shared.$radius-xl;
+    border: 0;
+  }
+  &.pill {
+    border-radius: shared.$radius-full;
+  }
+  &.secondary {
+    border-radius: shared.$radius-xl;
+    padding: 0.5rem 1rem;
+    background: shared.$color-blue-600;
+    color: shared.$color-neutral-100;
+    font-weight: shared.$font-weight-medium;
+    font-size: shared.$font-size-sm;
+    border: 0;
+    gap: 0.5rem;
+  }
+  &.circle {
+    border-radius: shared.$radius-full;
+    padding: 0.8rem;
+    align-items: center;
+    border: 0.5px solid shared.$color-neutral-700;
+    background: shared.$color-alpha-100;
+  }
+  &.border {
+    border-radius: shared.$radius-full;
+    border: 1.5px solid shared.$color-blue-700;
+    background: rgba(255, 255, 255, 0.01);
+    padding: 0.75rem 2.625rem;
+    color: shared.$color-neutral-200;
+    font-size: shared.$font-size-lg;
+    font-weight: shared.$font-weight-medium;
+    box-shadow: 0 0 35px 0 rgba(0, 92, 241, 0.25) inset;
+  }
+
+  .icon-left, .icon-right { display: inline-flex; align-items: center; }
+  .icon-left :deep(svg), .icon-right :deep(svg) { width: 20px; height: 20px; }
+}
