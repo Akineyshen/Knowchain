@@ -11,6 +11,9 @@ export { default as Friends } from './userInterface/Friends.vue'
 export { default as Wallet } from './userInterface/Wallet.vue'
 export { default as Copy } from './userInterface/Copy.vue'
 export { default as AddFriends } from './userInterface/AddFriends.vue'
+export { default as Cup } from './userInterface/Cup.vue'
+export { default as Learn } from './userInterface/Learn.vue'
+export { default as Lock } from './userInterface/Lock.vue'
 
 // Social
 export { default as GitHub } from './social/GitHub.vue'

@@ -14,7 +14,7 @@ const tonConnectUI = ref<TonConnectUI | null>(null)
 const state = ref<TonConnectState>({
     wallet: null,
     connected: false,
-    address: null
+    address: null,
 })
 
 export function useTonConnect() {
@@ -22,7 +22,7 @@ export function useTonConnect() {
     const walletAddress = computed(() => state.value.address)
     const currentWallet = computed(() => state.value.wallet)
 
-    const manifestUrl = 'https://900e6fd14e25.ngrok-free.app/manifest/tonconnect-manifest.json'
+    const manifestUrl = `https://app.knowchain.eu/manifest/tonconnect-manifest.json`
 
     const initTonConnect = async () => {
         try {
