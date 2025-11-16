@@ -1,6 +1,6 @@
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import type { Wallet } from '@tonconnect/sdk'
-import { TonConnect } from '@tonconnect/sdk'
+import { toUserFriendlyAddress } from '@tonconnect/sdk'
 import { TonConnectUI } from '@tonconnect/ui'
 
 interface TonConnectState {
@@ -9,8 +9,8 @@ interface TonConnectState {
     address: string | null
 }
 
-const tonConnect = ref<TonConnect | null>(null)
 const tonConnectUI = ref<TonConnectUI | null>(null)
+
 const state = ref<TonConnectState>({
     wallet: null,
     connected: false,
@@ -24,34 +24,39 @@ export function useTonConnect() {
 
     const manifestUrl = `https://app.knowchain.eu/manifest/tonconnect-manifest.json`
 
+    const updateWalletState = (wallet: Wallet | null) => {
+        if (!wallet) {
+            state.value.wallet = null
+            state.value.connected = false
+            state.value.address = null
+            return
+        }
+
+        const rawAddress = wallet.account.address
+
+        state.value.wallet = wallet
+        state.value.connected = true
+        state.value.address = toUserFriendlyAddress(rawAddress)
+    }
+
     const initTonConnect = async () => {
         try {
-            tonConnect.value = new TonConnect({
+            tonConnectUI.value = new TonConnectUI({
                 manifestUrl
             })
 
-            tonConnectUI.value = new TonConnectUI({
-                manifestUrl,
-            })
-
-            tonConnect.value.onStatusChange((wallet) => {
+            tonConnectUI.value.onStatusChange((wallet) => {
                 updateWalletState(wallet)
             })
 
-            const currentWallet = tonConnect.value.wallet
-            if (currentWallet) {
-                updateWalletState(currentWallet)
+            const current = tonConnectUI.value.wallet
+            if (current) {
+                updateWalletState(current)
             }
 
         } catch (error) {
             console.error('Error init Ton Connect:', error)
         }
-    }
-
-    const updateWalletState = (wallet: Wallet | null) => {
-        state.value.wallet = wallet
-        state.value.connected = !!wallet
-        state.value.address = wallet ? wallet.account.address : null
     }
 
     const connectWallet = async () => {
@@ -77,12 +82,6 @@ export function useTonConnect() {
         initTonConnect()
     })
 
-    onUnmounted(() => {
-        if(tonConnect.value) {
-            tonConnect.value.disconnect()
-        }
-    })
-
     return {
         // Condition
         isConnected,
@@ -94,6 +93,6 @@ export function useTonConnect() {
         formatAddress,
 
         // Utils
-        initTonConnect
+        initTonConnect,
     }
 }

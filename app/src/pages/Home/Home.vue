@@ -10,9 +10,16 @@
   const isPopupOpen = ref(false)
   const { isConnected, walletAddress, connectWallet, formatAddress } = useTonConnect()
 
+  const handleOpenConnect = () => {
+    if (!isConnected.value) {
+      isPopupOpen.value = true
+    }
+  }
+
   async function handleConfirm() {
     try {
       await connectWallet()
+      isPopupOpen.value = false
     } catch (e) {
       console.error(e)
     }
@@ -28,7 +35,11 @@
     </template>
 
     <template #center>
-      <Button variant="secondary" @click="isPopupOpen = true">
+      <Button
+          variant="secondary"
+          :disabled="isConnected"
+          @click="handleOpenConnect"
+      >
         <Icon name="Wallet" :size="14"/>
         <span v-if="!isConnected">Connect Wallet</span>
         <span v-else>{{ formatAddress(walletAddress) }}</span>
