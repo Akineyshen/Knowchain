@@ -1,26 +1,92 @@
 version: '3.9'
 services:
-  landing-client:
-    build: ./landing/client
-    container_name: landing-client
+  landing:
+    build:
+      context: .
+      dockerfile: landing/Dockerfile
+    container_name: landing
+    volumes:
+      - ./landing:/app
+      - /app/node_modules
+      - ./shared:/shared
     ports:
-      - "3000:80"
-
-  app-client:
-    build: ./app/client
-    container_name: app-client
-    ports:
-      - "3001:80"
-
-  dashboard-client:
-    build: ./dashboard/client
-    container_name: dashboard-client
-    ports:
-      - "3002:80"
-
-  app-server:
-    build: ./app/server
-    container_name: app-server
-    ports:
-      - "4000:3000"
+      - "3000:5173"
+    environment:
+      - VITE_API_URL=http://localhost:4000
     restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: app/Dockerfile
+    container_name: app
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+      - ./shared:/shared
+    ports:
+      - "3001:5173"
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    container_name: dashboard
+    volumes:
+      - ./dashboard:/app
+      - /app/node_modules
+      - ./shared:/shared
+    ports:
+      - "3002:5173"
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: knowchain
+      CORS_ORIGINS: http://localhost:3000,http://localhost:3001,http://localhost:3002
+      JWT_SECRET: secret
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: knowchain
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:

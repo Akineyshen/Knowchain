@@ -1,17 +1,19 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { useI18n } from 'vue-i18n'
   import Button from '@components/Button/Button.vue'
   import Icon from '@components/Icon/Icon.vue'
-  import VideoModal from '@components/VideoModal/VideoModal.vue'
 
-  const isVideoModalOpen = ref(false)
+  const { t } = useI18n()
 
-  const openVideoModal = () => {
-    isVideoModalOpen.value = true
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById('about-us')
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
-  const closeVideoModal = () => {
-    isVideoModalOpen.value = false
+  const openApp = () => {
+    window.location.href = 'https://app.knowchain.eu/'
   }
 </script>
 
@@ -20,38 +22,19 @@
     <div class="container">
       <div class="content">
         <div class="badge">
-          <Icon name="AcademicCap" :size="18" color="#F5F5F5" />
-          <span>Learn & Earn</span>
+          {{ t('hero.subtitle') }}
         </div>
-
-        <div class="title">
-          Start your
-          <span class="text-gradient">Crypto</span>
-          journey with engaging
-          <span class="text-gradient">Learning</span>
-        </div>
-
-        <p class="description">
-          We turn blockchain learning into a game: complete tasks, earn KNW, level up, and get rewards for invites.
-        </p>
-
+        <div class="title">{{ t('hero.title_start') }} <br> {{ t('hero.title_end') }}</div>
         <div class="actions">
-          <Button variant="primary">Launch App
+          <Button variant="primary" @click="openApp">{{ t('hero.buttonGetStarted') }}
             <Icon name="UpRightCircle" />
           </Button>
-          <Button variant="outline" @click="openVideoModal">
-            Watch intro
-            <Icon name="Play" />
+          <Button variant="secondary" class="button-secondary" @click="scrollToAbout">
+            {{ t('hero.buttonLearnMore') }}
           </Button>
         </div>
       </div>
     </div>
-
-    <VideoModal
-        :is-open="isVideoModalOpen"
-        title="Knowchain Intro"
-        @close="closeVideoModal"
-    />
   </section>
 </template>
 

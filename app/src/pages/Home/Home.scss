@@ -1,0 +1,27 @@
+@use '@shared/style/main.scss' as shared;
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.balance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.balance {
+  font-size: shared.$font-size-4xl;
+  font-weight: shared.$font-weight-bold;
+  color: shared.$color-neutral-100;
+}

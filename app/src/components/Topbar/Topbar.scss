@@ -1,0 +1,41 @@
+@use '@shared/style/main.scss' as shared;
+
+.topbar {
+  position: fixed;
+  top: 1rem;
+  left: 0; right: 0;
+  z-index: 1001;
+  padding: 1rem 1rem;
+  pointer-events: none;
+}
+
+.container {
+  pointer-events: auto;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.zone {
+  display: flex;
+  align-items: center;
+}
+
+.left { justify-content: flex-start; }
+.center { justify-content: center; }
+.right { justify-content: flex-end; }
+
+@supports (top: env(safe-area-inset-top)) {
+  .topbar { padding-top: max(12px, env(safe-area-inset-top)); }
+}
+
+@media (min-width: 768px) {
+  .topbar { padding: 16px 24px; }
+  .container { gap: 16px; }
+}
+
+@media (min-width: 1024px) {
+  .topbar { padding: 18px 28px; }
+}

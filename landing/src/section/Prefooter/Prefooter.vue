@@ -1,23 +1,21 @@
 <script setup lang="ts">
+  import { useI18n } from 'vue-i18n'
   import Button from '@components/Button/Button.vue'
-  import { Download } from 'lucide-vue-next'
+
+  const { t } = useI18n()
+
+  const openApp = () => {
+    window.location.href = 'https://app.knowchain.eu/'
+  }
 </script>
 
 <template>
   <section class="register">
     <div class="container">
       <div class="content">
-        <h2 class="title">
-          Register Within a Minutes and Start Invest Now
-        </h2>
-        <p class="description">
-          Register in minutes and start investing today—quick, easy, and secure!
-        </p>
-
+        <h2 class="title">{{ t('prefooter.title') }}</h2>
         <div class="actions">
-          <Button variant="primary">
-            Launch Knowchain
-          </Button>
+          <Button variant="primary" @click="openApp">{{ t('prefooter.button') }}</Button>
         </div>
       </div>
     </div>

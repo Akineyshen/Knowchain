@@ -1,6 +1,13 @@
 <script setup lang="ts">
   import Button from '@components/Button/Button.vue'
   import Icon from '@components/Icon/Icon.vue'
+  import { useI18n } from 'vue-i18n'
+
+  const { t } = useI18n()
+
+  const openApp = () => {
+    window.location.href = 'https://app.knowchain.eu/'
+  }
 </script>
 
 <template>
@@ -8,20 +15,12 @@
     <div class="container">
       <div class="heroCard">
         <div class="left">
-          <h2 class="title">
-            Begin your journey in
-            <span class="text-gradient">digital finance</span>
-          </h2>
-
-          <p class="description">
-            Level up, explore crypto, and unlock new earning opportunities.
-            Everything begins with knowledge, because only by understanding
-            the rules of the game can you win.
-          </p>
+          <h2 class="title">{{ t('learn.title') }}</h2>
+          <p class="description">{{ t('learn.description') }}</p>
 
           <div class="actions">
-            <Button variant="primary">
-              Try Knowchain
+            <Button variant="primary" @click="openApp">
+              {{ t('learn.button') }}
               <Icon name="UpRightCircle" />
             </Button>
           </div>

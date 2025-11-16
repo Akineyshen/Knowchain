@@ -1,0 +1,17 @@
+{
+  "name": "Knowchain",
+  "short_name": "Knowchain",
+  "description": "Trade, track, and secure your cryptocurrency portfolio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#040718",
+  "theme_color": "#040718",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo/logo_dark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

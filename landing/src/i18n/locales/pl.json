@@ -1,0 +1,49 @@
+{
+  "header": {
+    "aboutUs": "O nas",
+    "benefits": "Korzyści",
+    "learn": "Ucz się",
+    "play": "Graj",
+    "launchApp": "Uruchom aplikację"
+  },
+  "hero": {
+    "title_start": "Twoja krypto podróż",
+    "title_end": "zaczyna się tutaj",
+    "subtitle": "grywalizowany sposób na opanowanie kryptowalut",
+    "buttonGetStarted": "Zacznij teraz",
+    "buttonLearnMore": "Dowiedz się więcej"
+  },
+  "aboutUs": {
+    "badge": "O NAS",
+    "title": "Świat kryptowalut z Knowchain",
+    "description": "Aplikacja edukacyjna zaprojektowana jako gra sprawia, że nauka o kryptowalutach jest angażująca i dostępna. Upraszczamy złożone koncepcje blockchain, łącząc edukację z elementami grywalizacji."
+  },
+  "benefits": {
+    "badge": "KORZYŚCI",
+    "title": "Wszystko, czego potrzebujesz — w jednej aplikacji.",
+    "cardLearningTitle": "Nauka",
+    "cardLearningDescription": "Zanurz się w świat kryptowalut dzięki interaktywnym lekcjom i zadaniom",
+    "cardRewardsTitle": "Nagrody",
+    "cardRewardsDescription": "Zarabiaj tokeny KNW, wymieniaj je lub wypłacaj do zewnętrznych portfeli",
+    "cardCommunityTitle": "Społeczność",
+    "cardCommunityDescription": "Zapraszaj przyjaciół i rywalizuj na listach liderów"
+  },
+  "learn": {
+    "title": "Rozpocznij swoją podróż w cyfrowych finansach",
+    "description": "Wykonuj zadania, aby zarabiać tokeny KNW i odblokowywać nowe poziomy",
+    "button": "Wypróbuj Knowchain"
+  },
+  "play": {
+    "title": "Graj między lekcjami i zarabiaj KNW",
+    "roulette": "Ruletka",
+    "pairs": "Pary",
+    "clicker": "Kliker"
+  },
+  "prefooter": {
+    "title": "Zrób pierwszy krok ku pewnym inwestycjom w aktywa cyfrowe",
+    "button": "Uruchom Knowchain"
+  },
+  "footer": {
+    "description": "Naszą misją jest podnoszenie świadomości na temat aktywów cyfrowych poprzez oferowanie dostępnego i wciągającego sposobu nauki."
+  }
+}

@@ -1,0 +1,20 @@
+.learn-path {
+  position: relative;
+  width: 346px;
+  height: 1081px; // как в viewBox
+  margin: 0 auto;
+  border-radius: 32px;
+}
+
+.learn-path__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.learn-path__node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
