@@ -1,12 +1,14 @@
 import { ref, computed, onMounted } from 'vue'
-import type { Wallet } from '@tonconnect/sdk'
-import { toUserFriendlyAddress } from '@tonconnect/sdk'
+import { toUserFriendlyAddress, type Wallet } from '@tonconnect/sdk'
 import { TonConnectUI } from '@tonconnect/ui'
+import { getTonProofPayload, tonLogin, type TonProofPayload } from "../services/authAPI.ts";
 
 interface TonConnectState {
     wallet: Wallet | null
     connected: boolean
     address: string | null
+    rawAddress: string | null
+    initialized: boolean
 }
 
 const tonConnectUI = ref<TonConnectUI | null>(null)
@@ -15,12 +17,15 @@ const state = ref<TonConnectState>({
     wallet: null,
     connected: false,
     address: null,
+    rawAddress: null,
+    initialized: false,
 })
 
 export function useTonConnect() {
     const isConnected = computed(() => state.value.connected)
     const walletAddress = computed(() => state.value.address)
     const currentWallet = computed(() => state.value.wallet)
+    const isInitialized = computed(() => state.value.initialized)
 
     const manifestUrl = `https://app.knowchain.eu/manifest/tonconnect-manifest.json`
 
@@ -29,6 +34,7 @@ export function useTonConnect() {
             state.value.wallet = null
             state.value.connected = false
             state.value.address = null
+            state.value.rawAddress = null
             return
         }
 
@@ -36,7 +42,33 @@ export function useTonConnect() {
 
         state.value.wallet = wallet
         state.value.connected = true
+        state.value.rawAddress = rawAddress
         state.value.address = toUserFriendlyAddress(rawAddress)
+    }
+
+    const prepareTonProof = async () => {
+        if (!tonConnectUI.value) return
+
+        tonConnectUI.value.setConnectRequestParameters({ state: 'loading' })
+
+        try {
+            const payload = await getTonProofPayload()
+
+            if (!payload) {
+                tonConnectUI.value.setConnectRequestParameters(null)
+                return
+            }
+
+            tonConnectUI.value.setConnectRequestParameters({
+                state: 'ready',
+                value: {
+                    tonProof: payload,
+                },
+            })
+        } catch (e) {
+            console.error('Error in prepareTonProof', e)
+            tonConnectUI.value.setConnectRequestParameters(null)
+        }
     }
 
     const initTonConnect = async () => {
@@ -45,8 +77,23 @@ export function useTonConnect() {
                 manifestUrl
             })
 
-            tonConnectUI.value.onStatusChange((wallet) => {
+            tonConnectUI.value.onStatusChange(async (wallet) => {
                 updateWalletState(wallet)
+
+                if (
+                    wallet &&
+                    wallet.connectItems?.tonProof &&
+                    'proof' in wallet.connectItems.tonProof
+                ) {
+                    const proof = wallet.connectItems.tonProof.proof as TonProofPayload
+                    const rawAddress = wallet.account.address
+
+                    try {
+                        await tonLogin(rawAddress, proof)
+                    } catch (e) {
+                        console.error('Ton login error:', e)
+                    }
+                }
             })
 
             const current = tonConnectUI.value.wallet
@@ -54,8 +101,10 @@ export function useTonConnect() {
                 updateWalletState(current)
             }
 
+            state.value.initialized = true
         } catch (error) {
             console.error('Error init Ton Connect:', error)
+            state.value.initialized = true
         }
     }
 
@@ -66,9 +115,11 @@ export function useTonConnect() {
         }
 
         try {
+            void prepareTonProof()
+
             await tonConnectUI.value.openModal()
         } catch (error) {
-            console.error('Error connect wallet:', error)
+            console.error('TonConnectUI is not initialized')
             throw error
         }
     }
@@ -87,6 +138,7 @@ export function useTonConnect() {
         isConnected,
         walletAddress,
         currentWallet,
+        isInitialized,
 
         // Methods
         connectWallet,
