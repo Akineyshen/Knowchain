@@ -52,6 +52,13 @@
     font-weight: shared.$font-weight-medium;
     box-shadow: 0 0 35px 0 rgba(0, 92, 241, 0.25) inset;
   }
+  &.ghost {
+    color: shared.$color-neutral-500;
+    font-size: shared.$font-size-base;
+    font-weight: shared.$font-weight-medium;
+    background: transparent;
+    border: 0;
+  }
 
   .icon-left, .icon-right { display: inline-flex; align-items: center; }
   .icon-left :deep(svg), .icon-right :deep(svg) { width: 20px; height: 20px; }

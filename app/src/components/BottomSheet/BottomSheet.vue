@@ -8,16 +8,21 @@ interface Props {
   description?: string
   confirmText?: string
   closeOnOverlay?: boolean
+  showSecondary?: boolean
+  secondaryText?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   closeOnOverlay: true,
-  confirmText: 'Connect wallet'
+  confirmText: 'Connect wallet',
+  showSecondary: false,
+  secondaryText: 'Continue without wallet'
 })
 
 const emit = defineEmits<{
   'update:modelValue': [value: boolean]
   'confirm': []
+  'secondary': []
 }>()
 
 function closePopup() {
@@ -32,24 +37,31 @@ function handleOverlayClick() {
 
 function handleConfirm() {
   emit('confirm')
-  closePopup()
+}
+
+function handleSecondary() {
+  emit('secondary')
 }
 
 function handleEscape(event: KeyboardEvent) {
-  if (event.key === 'Escape' && props.modelValue) {
+  if (event.key === 'Escape' && props.modelValue && props.closeOnOverlay) {
     closePopup()
   }
 }
 
-watch(() => props.modelValue, (newValue) => {
-  if (newValue) {
-    document.body.style.overflow = 'hidden'
-    document.addEventListener('keydown', handleEscape)
-  } else {
-    document.body.style.overflow = ''
-    document.removeEventListener('keydown', handleEscape)
-  }
-}, { immediate: true })
+watch(
+    () => props.modelValue,
+    (newValue) => {
+      if (newValue) {
+        document.body.style.overflow = 'hidden'
+        document.addEventListener('keydown', handleEscape)
+      } else {
+        document.body.style.overflow = ''
+        document.removeEventListener('keydown', handleEscape)
+      }
+    },
+    { immediate: true }
+)
 </script>
 
 <template>
@@ -77,6 +89,15 @@ watch(() => props.modelValue, (newValue) => {
                 @click="handleConfirm"
             >
               {{ confirmText }}
+            </Button>
+
+            <Button
+                v-if="showSecondary"
+                variant="ghost"
+                class="popup-button popup-button--secondary"
+                @click="handleSecondary"
+            >
+              {{ secondaryText }}
             </Button>
           </slot>
         </div>
