@@ -1,5 +1,6 @@
+import axios from "axios";
+
 export class TonService {
-  // Simple TON raw address validation (workchain:hash)
   static isValidRawAddress(rawAddress: string): boolean {
     if (!rawAddress || typeof rawAddress !== "string") {
       return false;
@@ -13,5 +14,25 @@ export class TonService {
 
   static normalizeRawAddress(rawAddress: string): string {
     return rawAddress.trim();
+  }
+
+  static async validateProof(address: string, proof: any): Promise<boolean> {
+    try {
+      const response = await axios.post(
+        "https://tonapi.io/v2/tonconnect/proof/check",
+        {
+          address,
+          proof
+        }
+      );
+
+      return response.data.valid === true;
+    } catch (err: any) {
+      console.error(
+        "TON proof validation error:",
+        err?.response?.data || err
+      );
+      return false;
+    }
   }
 }
