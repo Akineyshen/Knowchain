@@ -7,16 +7,15 @@
 
 <template>
   <svg
-      class="icon"
       xmlns="http://www.w3.org/2000/svg"
       :width="props.size"
       :height="props.size"
-      viewBox="0 0 8 16"
+      viewBox="0 0 9 16"
       fill="none"
   >
     <path
-        d="M6.36951 0.75L1.03889 6.96905C0.653702 7.41844 0.653703 8.08156 1.03889 8.53095L6.36951 14.75"
-        :stroke="props.color ?? 'white'"
+        d="M8.12769 14.75L1.15979 8.6531C0.613397 8.17501 0.613398 7.32501 1.15979 6.84692L8.12769 0.750011"
+        :stroke="props.color"
         stroke-width="1.5"
         stroke-linecap="round"
     />

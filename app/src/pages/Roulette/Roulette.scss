@@ -1,0 +1,119 @@
+@use "@shared/style/main.scss" as shared;
+
+.roulette-page {
+  min-height: 100vh;
+  padding: 16px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  box-sizing: border-box;
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.roulette-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* колесо + указатель */
+
+.roulette-wheel-wrapper {
+  position: relative;
+  width: 20rem;
+  height: 20rem;
+}
+
+/* 0deg у conic-gradient — по умолчанию справа.
+   from -90deg сдвигает 0deg наверх.
+   => наш сегмент 100 начинается СВЕРХУ, дальше по часовой стрелке. */
+
+.roulette-wheel {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  border: 8px solid #005cf1;
+  background: conic-gradient(
+                  from -90deg,
+                  #0EA5E9 0deg 45deg,
+                  #EF4444 45deg 90deg,
+                  #22C55E 90deg 135deg,
+                  #A855F7 135deg 180deg,
+                  #F43F5E 180deg 225deg,
+                  #10B981 225deg 270deg,
+                  #F97316 270deg 315deg,
+                  #64748B 315deg 360deg
+  );
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.8);
+  transition: transform 4s cubic-bezier(0.16, 1, 0.35, 1);
+  overflow: hidden;
+}
+
+/* подписи на сегментах */
+
+.roulette-wheel__label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: 50% 50%;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+/* стрелка сверху */
+
+.roulette-pointer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.roulette-pointer__shape {
+  position: relative;
+  width: 96px;
+  height: 56px;
+  border-radius: 999px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* носик стрелки вниз на сектор */
+
+.roulette-pointer__shape::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid;
+  border-width: 20px 16px 0 16px;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+.roulette-pointer__logo {
+  width: 32px;
+  height: 32px;
+}
+
+/* нижняя кнопка */
+
+.roulette-start-btn {
+  margin-top: 24px;
+  width: 100%;
+  height: 56px;
+  border-radius: 999px;
+  justify-content: center;
+  font-size: 18px;
+}

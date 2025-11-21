@@ -1,0 +1,95 @@
+@use '@shared/style/main.scss' as shared;
+
+.pairs-page {
+  min-height: 100vh;
+  padding: 16px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  box-sizing: border-box;
+  max-width: 45rem;
+  margin: 0 auto;
+}
+
+.pairs-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Moves + Time */
+
+.pairs-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: shared.$font-size-xl;
+  color: shared.$color-neutral-200;
+  font-weight: shared.$font-weight-medium;
+  margin: 2rem 0;
+}
+
+.pairs-stats__moves,
+.pairs-stats__time {
+  letter-spacing: 0.02em;
+}
+
+/* сетка карточек */
+
+.pairs-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 12px;
+  max-width: 360px;
+  width: 100%;
+  max-height: 360px;
+  margin: 0 auto;
+}
+
+.pairs-card {
+  position: relative;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  background: shared.$color-neutral-600;
+  cursor: pointer;
+  transition:
+          background 0.12s ease,
+          transform 0.08s ease,
+          box-shadow 0.12s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pairs-card:active {
+  transform: scale(0.97);
+}
+
+.pairs-card--revealed {
+  background: shared.$color-neutral-300;
+  box-shadow: 0 8px 22px rgba(212, 212, 212, 0.5);
+}
+
+.pairs-card--matched {
+  background: shared.$color-blue-700;
+  box-shadow: 0 8px 22px rgba(0, 92, 241, 0.35);
+}
+
+.pairs-card__symbol {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pairs-play-btn {
+  width: 100%;
+  height: 60px;
+  border-radius: 32px;
+  justify-content: center;
+  font-weight: shared.$font-weight-medium;
+  font-size: shared.$font-size-lg;
+}

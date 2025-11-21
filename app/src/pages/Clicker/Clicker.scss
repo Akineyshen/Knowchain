@@ -1,38 +1,14 @@
+@use '@shared/style/main.scss' as shared;
+
 .clicker-page {
   min-height: 100vh;
+  max-width: 45rem;
+  margin: auto;
   padding: 16px 16px 32px;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at top, #020617 0, #020617 60%, #000 100%);
   color: #ffffff;
   box-sizing: border-box;
-}
-
-/* ---------- header ---------- */
-
-.clicker-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 0 12px;
-}
-
-.clicker-header__title {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.clicker-header__icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: transparent;
-  color: #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
 }
 
 /* ---------- content ---------- */
@@ -46,40 +22,34 @@
 }
 
 .clicker-score {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 24px;
+  font-size: shared.$font-size-4xl;
+  font-weight: shared.$font-weight-semibold;
+  color: shared.$color-neutral-100;
+  margin-bottom: 3.5rem;
 }
 
-/* круглая кнопка */
-
 .clicker-circle-wrapper {
-  width: 260px;
-  height: 260px;
+  width: 18rem;
+  height: 18rem;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(148, 163, 184, 0.4) 0, #020617 55%, #020617 100%);
+  background: shared.$color-neutral-700;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 40px rgba(37, 99, 235, 0.35);
+  box-shadow: 0 4px 15px 6px rgba(152, 152, 152, 0.25) inset, 0 4px 25px 0 rgba(255, 255, 255, 0.25);
 }
 
 .clicker-circle {
-  width: 220px;
-  height: 220px;
+  width: 17rem;
+  height: 17rem;
   border-radius: 50%;
-  background: #0b1120;
+  background: shared.$color-neutral-800;
   border: none;
   outline: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition:
-          transform 0.08s ease,
-          box-shadow 0.08s ease,
-          opacity 0.15s ease;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
 }
 
 .clicker-circle--disabled {
@@ -97,30 +67,11 @@
 
 .clicker-circle__logo {
   position: relative;
-  width: 96px;
-  height: 72px;
+  width: 8rem;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.clicker-circle__logo-left,
-.clicker-circle__logo-right {
-  width: 42px;
-  height: 64px;
-  border-radius: 16px;
-  border: 6px solid;
-  background: transparent;
-}
-
-.clicker-circle__logo-left {
-  border-color: #ffffff;
-  border-right: none;
-}
-
-.clicker-circle__logo-right {
-  border-color: #2563eb;
-  border-left: none;
 }
 
 .clicker-circle__logo::before,
@@ -143,33 +94,7 @@
 /* ---------- bottom button ---------- */
 
 .clicker-start-btn {
-  margin-top: 24px;
   width: 100%;
   height: 56px;
   border-radius: 999px;
-  border: none;
-  background: #005cf1;
-  color: #ffffff;
-  font-size: 17px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-          transform 0.08s ease,
-          box-shadow 0.12s ease,
-          opacity 0.12s ease;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
-}
-
-.clicker-start-btn:active:not(:disabled) {
-  transform: translateY(1px) scale(0.99);
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-}
-
-.clicker-start-btn:disabled {
-  opacity: 0.6;
-  cursor: default;
-  box-shadow: none;
 }

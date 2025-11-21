@@ -10,13 +10,15 @@ interface Props {
   closeOnOverlay?: boolean
   showSecondary?: boolean
   secondaryText?: string
+  closeOnConfirm?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   closeOnOverlay: true,
   confirmText: 'Connect wallet',
   showSecondary: false,
-  secondaryText: 'Continue without wallet'
+  secondaryText: 'Continue without wallet',
+  closeOnConfirm: false
 })
 
 const emit = defineEmits<{
@@ -37,6 +39,9 @@ function handleOverlayClick() {
 
 function handleConfirm() {
   emit('confirm')
+  if (props.closeOnConfirm) {
+    closePopup()
+  }
 }
 
 function handleSecondary() {

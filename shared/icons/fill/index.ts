@@ -15,6 +15,16 @@ export { default as Cup } from './userInterface/Cup.vue'
 export { default as Learn } from './userInterface/Learn.vue'
 export { default as Lock } from './userInterface/Lock.vue'
 
+// Crypto
+export { default as ADA } from './crypto/ADA.vue'
+export { default as BNB } from './crypto/BNB.vue'
+export { default as BTC } from './crypto/BTC.vue'
+export { default as DOGE } from './crypto/DOGE.vue'
+export { default as ETH } from './crypto/ETH.vue'
+export { default as USDC } from './crypto/USDC.vue'
+export { default as USDT } from './crypto/USDT.vue'
+export { default as XRP } from './crypto/XRP.vue'
+
 // Social
 export { default as GitHub } from './social/GitHub.vue'
 export { default as Telegram } from './social/Telegram.vue'

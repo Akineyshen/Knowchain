@@ -1,0 +1,23 @@
+{
+  "name": "Knowchain",
+  "short_name": "Knowchain",
+  "description": "Your crypto journey start here",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#040718",
+  "theme_color": "#040718",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

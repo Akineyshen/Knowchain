@@ -1,0 +1,84 @@
+@use "@shared/style/main.scss" as shared;
+
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: shared.$color-bg-darker;
+  background-image: radial-gradient(
+                  circle at center,
+                  rgba(0, 92, 241, 0.35) 0%,
+                  #005CF111 50%,
+                  transparent 80%
+  );
+}
+
+.loading-card {
+  width: 100%;
+  max-width: 18rem;
+  text-align: center;
+}
+
+.loading-logo {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto 0.5rem;
+  border-radius: 20px;
+  display: block;
+}
+
+.loading-title {
+  font-size: shared.$font-size-4xl;
+  margin-bottom: 3rem;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.loading-bar-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: shared.$color-blue-700;
+
+  /* анимация заполнения */
+  animation: loading-fill 2s ease forwards;
+}
+
+@keyframes loading-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.loading-text {
+  font-size: shared.$color-neutral-100;
+  font-size: shared.$font-size-xl;
+  color: #e5e7eb;
+}
+
+@keyframes loading-bar-move {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(20%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}

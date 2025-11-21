@@ -1,0 +1,183 @@
+.install-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 999;
+}
+
+.install-card {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 24px;
+  padding: 0 20px 24px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.app-info {
+  .name {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .domain {
+    font-size: 14px;
+    opacity: 0.7;
+  }
+}
+
+/* скриншоты */
+.screenshots {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+
+  .screenshot {
+    flex: 0 0 65%;
+    max-width: 8rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 4px 0 6px;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.4;
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+
+/* кнопки */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 1rem 0;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  background: #f97316;
+  color: #0b1020;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.btn-ghost {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: transparent;
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-link {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 13px;
+  text-decoration: underline;
+  align-self: center;
+}
+
+/* модалки с инструкциями */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 10, 25, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 999;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  background: #020617;
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+}
+
+.modal h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-images {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+
+  img {
+    flex: 0 0 60%;
+    max-width: 220px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+  }
+}
+
+.modal ol {
+  padding-left: 20px;
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.hint {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.modal-btn {
+  width: 100%;
+  border-radius: 999px;
+  border: none;
+  padding: 10px 12px;
+  background: #22c55e;
+  color: #020617;
+  font-weight: 600;
+}

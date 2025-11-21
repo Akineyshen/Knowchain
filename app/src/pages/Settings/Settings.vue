@@ -9,7 +9,7 @@
     <Topbar>
       <template #left>
         <Button variant="circle" as="router-link" to="/">
-          <Icon name="Left" :filled="false" :size="20" />
+          <Icon name="Left" :filled="false" :size="24" />
         </Button>
       </template>
 

@@ -4,26 +4,27 @@ import Button from '@components/Button/Button.vue'
 import Icon from '@components/Icon/Icon.vue'
 import BottomSheet from '@components/BottomSheet/BottomSheet.vue'
 
-import { useClickerGame } from './Clicker'
+import { usePairsGame } from './Pairs'
 
 const {
-  score,
+  cards,
+  moves,
+  timeFormatted,
   isPlaying,
   isSending,
+  hasPlayedToday,
   isPopupOpen,
   popupTitle,
   popupDescription,
   popupMode,
-  hasPlayedToday,
-  formattedTime,
   startGame,
-  handleCircleClick,
+  handleCardClick,
   openInfoSheet
-} = useClickerGame()
+} = usePairsGame()
 </script>
 
 <template>
-  <div class="clicker-page">
+  <div class="pairs-page">
     <Topbar>
       <template #left>
         <Button variant="circle" as="router-link" to="/games">
@@ -32,7 +33,7 @@ const {
       </template>
 
       <template #center>
-        <div>Clicker</div>
+        <div>Pairs</div>
       </template>
 
       <template #right>
@@ -42,20 +43,32 @@ const {
       </template>
     </Topbar>
 
-    <main class="clicker-content">
-      <div class="clicker-score">
-        {{ score }}
+    <main class="pairs-content">
+      <div class="pairs-stats">
+        <span class="pairs-stats__moves">
+          Collected: {{ moves }}
+        </span>
+        <span class="pairs-stats__time">
+          {{ timeFormatted }}
+        </span>
       </div>
 
-      <div class="clicker-circle-wrapper">
+      <div class="pairs-grid">
         <button
-            class="clicker-circle"
-            :class="{ 'clicker-circle--disabled': !isPlaying }"
-            @click="handleCircleClick"
+            v-for="(card, index) in cards"
+            :key="card.id"
+            class="pairs-card"
+            :class="{
+            'pairs-card--revealed': card.isRevealed || card.isMatched,
+            'pairs-card--matched': card.isMatched
+          }"
+            @click="handleCardClick(index)"
         >
-          <img
-              class="clicker-circle__logo"
-              src="../../../public/logo/logo_dark.svg"
+          <Icon
+              v-if="card.isRevealed || card.isMatched"
+              class="pairs-card__icon"
+              :name="card.value"
+              :size="44"
           />
         </button>
       </div>
@@ -63,15 +76,15 @@ const {
 
     <Button
         variant="primary"
-        class="clicker-start-btn"
+        class="pairs-play-btn"
         :disabled="isPlaying || isSending || hasPlayedToday"
         @click="startGame"
     >
       <span v-if="!isPlaying">
-        {{ hasPlayedToday ? 'Try again tomorrow' : 'Start' }}
+        {{ hasPlayedToday ? 'Try again tomorrow' : 'Play' }}
       </span>
       <span v-else>
-        {{ formattedTime }}
+        {{ timeFormatted }}
       </span>
     </Button>
 
@@ -86,4 +99,4 @@ const {
   </div>
 </template>
 
-<style lang="scss" scoped src="./Clicker.scss" />
+<style lang="scss" scoped src="./Pairs.scss" />
