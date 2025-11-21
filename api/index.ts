@@ -10,6 +10,7 @@ import { initDb } from "./utils";
 
 import authRoutes from "./routes/auth";
 import userRoutes from "./routes/user";
+import courseRoutes from "./routes/course"
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(passport.initialize());
 
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use('/course', courseRoutes)
 
 const port = process.env.PORT || 3001;
 

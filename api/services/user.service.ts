@@ -3,7 +3,8 @@ import { TonService } from "./ton.service";
 import {
   createUserWithRawAddress,
   getUserByRawAddress,
-  updateUserOnFirstLogin
+  updateUserOnFirstLogin,
+  updateTokens 
 } from "../models/user";
 
 interface LoginOptions {
@@ -33,5 +34,23 @@ export class UserService {
     }
 
     return createUserWithRawAddress(normalized, options);
+  }
+
+  static async addTokens(userId: string, amount: number): Promise<User> {
+    if (!userId) {
+        throw new Error("Target User ID is required.");
+    }
+
+    if (typeof amount !== 'number' || amount === 0) {
+      throw new Error("Invalid token amount.");
+    }
+    
+    const updatedUser = await updateTokens(userId, amount); 
+    
+    if (!updatedUser) {
+      throw new Error("User not found."); 
+    }
+    
+    return updatedUser;
   }
 }
