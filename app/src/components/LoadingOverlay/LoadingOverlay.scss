@@ -53,7 +53,7 @@
   background: shared.$color-blue-700;
 
   /* анимация заполнения */
-  animation: loading-fill 2s ease forwards;
+  animation: loading-fill 1.5s ease forwards;
 }
 
 @keyframes loading-fill {

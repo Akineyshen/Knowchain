@@ -16,22 +16,21 @@ export async function getUserByRawAddress(rawAddress: string): Promise<User | nu
 interface CreateUserOptions {
   name?: string | null;
   tokens?: number;
-  course_id?: string | null;
 }
 
 export async function createUserWithRawAddress(
   rawAddress: string,
   options: CreateUserOptions = {}
 ): Promise<User> {
-  const { name = null, tokens = 0, course_id = null } = options;
+  const { name = null, tokens = 0 } = options;
 
   const query = `
-    INSERT INTO users (raw_address, name, tokens, course_id)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users (raw_address, name, tokens)
+    VALUES ($1, $2, $3)
     RETURNING *;
   `;
 
-  const { rows } = await pool.query(query, [rawAddress, name, tokens, course_id]);
+  const { rows } = await pool.query(query, [rawAddress, name, tokens]);
   return rows[0];
 }
 
@@ -54,4 +53,41 @@ export async function updateUserOnFirstLogin(
 
   const { rows } = await pool.query(query, [id, name]);
   return rows[0];
+}
+
+export async function updateTokens(id: string, amount: number): Promise<User | null> {
+    const query = `
+        UPDATE users
+        SET
+            tokens = tokens + $2,
+            updated_at = NOW()
+        WHERE id = $1
+        RETURNING *;
+    `;
+    const { rows } = await pool.query(query, [id, amount]);
+    return rows[0] || null;
+}
+
+export async function spendTokens(id: string, amount: number): Promise<User> {
+    const query = `
+        UPDATE users
+        SET
+            tokens = tokens - $2,
+            updated_at = NOW()
+        WHERE id = $1
+          AND tokens >= $2 
+        RETURNING *;
+    `;
+
+    const { rows } = await pool.query(query, [id, amount]); 
+    
+    if (rows.length === 0) {
+        const userCheck = await getUserById(id);
+        if (userCheck && userCheck.tokens < amount) {
+             throw new Error("Insufficient tokens.");
+        }
+        throw new Error("User not found or tokens insufficient.");
+    }
+    
+    return rows[0];
 }

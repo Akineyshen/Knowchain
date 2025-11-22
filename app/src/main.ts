@@ -15,7 +15,7 @@ app.use(router)
 app.mount('#app')
 
 const routerReady = router.isReady()
-const minTime = new Promise(resolve => setTimeout(resolve, 2000))
+const minTime = new Promise(resolve => setTimeout(resolve, 1500))
 
 Promise.all([routerReady, minTime]).then(() => {
     finishLoading()

@@ -1,65 +1,63 @@
-export interface TonProofPayload {
-    timestamp: number
-    domain: {
-        lengthBytes: number
-        value: string
-    }
-    signature: string
-    payload: string
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'
+
+export interface User {
+    id: string | number
+    raw_address: string
+    name?: string
+    tokens: number
 }
 
-const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001'
-
-export async function getTonProofPayload(): Promise<string | null> {
+export async function tonLogin(rawAddress: string): Promise<any> {
     try {
-        const res = await fetch(`${apiUrl}/auth/ton-login/payload`)
+        console.log('🚀 Auth: Sending login request via Cookie Session...');
+
+        const res = await fetch(`${API_URL}/auth/ton-login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Важно: include заставляет браузер принимать и сохранять Set-Cookie от сервера
+            credentials: 'include',
+            body: JSON.stringify({ raw_address: rawAddress }),
+        })
+
+        const data = await res.json().catch(() => null);
 
         if (!res.ok) {
-            return null
+            throw new Error(data?.message || 'Login failed');
         }
 
-        const contentType = res.headers.get('content-type') || ''
-        if (!contentType.includes('application/json')) {
-            return null
-        }
-
-        const data = await res.json().catch(() => null)
-        if (!data || typeof data.payload !== 'string') {
-            return null
-        }
-
-        return data.payload
+        console.log('✅ Login successful. Session cookie should be set by browser.');
+        return data
     } catch (error) {
-        console.error('Error fetching ton-proof payload', error)
-        return null
+        console.error('Ton login error:', error)
+        throw error
     }
 }
 
-export async function tonLogin(address: string, proof: TonProofPayload) {
-    const body = {
-        address,
-        proof: {
-            timestamp: proof.timestamp,
-            domain: proof.domain,
-            signature: proof.signature,
-            payload: proof.payload,
-        },
+export async function getMe(): Promise<User | null> {
+    try {
+        // Мы не отправляем заголовок Authorization, так как токен лежит в куках.
+        // Браузер сам прикрепит куки благодаря credentials: 'include'
+        const res = await fetch(`${API_URL}/user/me`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+        })
+
+        if (!res.ok) {
+            if (res.status === 401) {
+                console.warn('❌ Unauthorized (401). Cookie missing or CORS issue on Backend.');
+            }
+            return null
+        }
+
+        const userData = await res.json();
+        return userData;
+    } catch (error) {
+        console.error('Error fetching user:', error)
+        return null
     }
-
-    const res = await fetch(`${apiUrl}/auth/ton-login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-    })
-
-    const data = await res.json().catch(() => null)
-
-    if (!res.ok) {
-        console.error('Ton login failed:', data || res.statusText)
-        throw new Error('Ton login failed')
-    }
-
-    return data
 }
