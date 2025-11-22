@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
-  import Icon from "../Icon/Icon.vue"
+  import Icon from "@components/ui/Icon/Icon.vue"
 
   const tabs = [
     { key: 'home', label: 'Home', name: 'Home', path: '/' },

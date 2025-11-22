@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LessonNode from '@components/LessonNode/LessonNode.vue'
+import LessonNode from '@components/learn/LessonNode/LessonNode.vue'
 
 type LessonStatus = 'completed' | 'active' | 'locked'
 type LessonKind = 'test' | 'theory'

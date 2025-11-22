@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Topbar from '@components/Topbar/Topbar.vue'
-import Button from '@components/Button/Button.vue'
-import Icon from '@components/Icon/Icon.vue'
-import FriendsItem from '@components/FriendsItem/FriendsItem.vue'
+import Topbar from '@components/layout/Topbar/Topbar.vue'
+import Button from '@components/ui/Button/Button.vue'
+import Icon from '@components/ui/Icon/Icon.vue'
+import UsersItem from '@components/users/UsersItem/UsersItem.vue'
 
 import { useRatings } from './Ratings'
 import { formatBalanceShort } from './Ratings'
@@ -72,7 +72,7 @@ const safeAvatar = (src?: string | null) => src || '/avatars/default.png'
             {{ user.rank }}
           </div>
 
-          <FriendsItem
+          <UsersItem
               class="ratings-row__item"
               :avatar="user.avatar"
               :name="user.name"

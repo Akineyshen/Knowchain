@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Navbar from '@components/Navbar/Navbar.vue'
-import Button from '@components/Button/Button.vue'
+import Navbar from '@components/layout/Navbar/Navbar.vue'
+import Button from '@components/ui/Button/Button.vue'
 
 interface GameItem {
   id: 'pairs' | 'clicker' | 'roulette'

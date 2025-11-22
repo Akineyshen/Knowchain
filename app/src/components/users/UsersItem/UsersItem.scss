@@ -1,19 +1,19 @@
 @use '@shared/style/main.scss' as shared;
 
-.friend-item {
+.user-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 0;
 }
 
-.friend-info {
+.user-info {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.friend-avatar {
+.user-avatar {
   width: 48px;
   height: 48px;
   border-radius: shared.$radius-full;
@@ -27,26 +27,36 @@
   }
 }
 
-.friend-details {
+.user-details {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.friend-name {
+.user-name {
   font-size: shared.$font-size-base;
   font-weight: shared.$font-weight-medium;
   color: shared.$color-neutral-50;
 }
 
-.friend-date {
+.user-date {
   font-size: shared.$font-size-sm;
   font-weight: shared.$font-weight-light;
   color: shared.$color-neutral-500;
 }
 
-.friend-balance {
+.user-balance {
   font-size: shared.$font-size-base;
   font-weight: shared.$font-weight-medium;
   color: shared.$color-neutral-50;
+
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.user-points-logo {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
 }

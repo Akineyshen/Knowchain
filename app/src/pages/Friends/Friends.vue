@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Navbar from "@components/Navbar/Navbar.vue"
-import Button from "@components/Button/Button.vue"
-import Icon from "@components/Icon/Icon.vue"
-import FriendsItem from "@components/FriendsItem/FriendsItem.vue"
+import Navbar from "@components/layout/Navbar/Navbar.vue"
+import Button from "@components/ui/Button/Button.vue"
+import Icon from "@components/ui/Icon/Icon.vue"
+import UsersItem from "@components/users/UsersItem/UsersItem.vue"
 import { onMounted, computed, ref } from 'vue'
-import { useFriends } from "../../composables/useFriends"
+import { useFriends } from "@composables/useFriends.ts"
 
 const {
   friends,
@@ -64,7 +64,7 @@ onMounted(async () => {
       <h2 class="section-title">Your referred friends:</h2>
 
       <div class="friends-list">
-        <FriendsItem
+        <UsersItem
             v-for="friend in friends"
             :key="friend.id"
             :avatar="friend.avatarUrl"

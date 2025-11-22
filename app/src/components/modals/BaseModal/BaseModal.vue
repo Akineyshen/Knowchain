@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import Button from '@components/Button/Button.vue'
+import Button from '@components/ui/Button/Button.vue'
 
 interface Props {
   modelValue: boolean
@@ -111,4 +111,4 @@ watch(
   </Transition>
 </template>
 
-<style lang="scss" scoped src="./BottomSheet.scss"/>
+<style lang="scss" scoped src="./BaseModal.scss"/>

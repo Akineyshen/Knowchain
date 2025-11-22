@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Icon from '@components/Icon/Icon.vue'
+import Icon from '@components/ui/Icon/Icon.vue'
 
 type LessonStatus = 'completed' | 'active' | 'locked'
 

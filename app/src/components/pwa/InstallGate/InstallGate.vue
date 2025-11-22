@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { useInstallGate } from './InstallGate'
-  import Button from '@components/Button/Button.vue'
+  import { useInstallGate } from './InstallGate.ts'
+  import Button from '@components/ui/Button/Button.vue'
 
   const {
     isStandalone,

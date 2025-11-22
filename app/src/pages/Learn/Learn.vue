@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import Navbar from "@components/Navbar/Navbar.vue"
-  import LearnPath from "@components/LearnPath/LearnPath.vue"
+  import Navbar from "@components/layout/Navbar/Navbar.vue"
+  import LearnPath from "@components/learn/LearnPath/LearnPath.vue"
 </script>
 
 <template>

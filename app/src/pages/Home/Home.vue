@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import Navbar from "@components/Navbar/Navbar.vue"
-import Button from "@components/Button/Button.vue"
-import Topbar from "@components/Topbar/Topbar.vue"
-import Icon from "@components/Icon/Icon.vue"
-import BottomSheet from "@components/BottomSheet/BottomSheet.vue"
+import Navbar from "@components/layout/Navbar/Navbar.vue"
+import Button from "@components/ui/Button/Button.vue"
+import Topbar from "@components/layout/Topbar/Topbar.vue"
+import Icon from "@components/ui/Icon/Icon.vue"
+import BaseModal from "@components/modals/BaseModal/BaseModal.vue"
 import { useTonConnect } from "@composables/useTonConnect"
 
 const isPopupOpen = ref(false)
@@ -17,18 +17,13 @@ const {
   walletAddress,
   connectWallet,
   formatAddress,
-  user
+  // user
 } = useTonConnect()
 
-// 2. Вычисляем баланс на основе данных пользователя
-const formattedBalance = computed(() => {
-  // Если пользователя нет или у него нет поля tokens — показываем 0
-  // (Предполагаем, что в интерфейсе User в authAPI.ts есть поле tokens: number)
-  const balance = user.value?.tokens || 0
-
-  // Форматируем число (например: 100000 -> 100,000)
-  return new Intl.NumberFormat('en-US').format(balance)
-})
+// const formattedBalance = computed(() => {
+//   const balance = user.value?.tokens || 0
+//   return new Intl.NumberFormat('en-US').format(balance)
+// })
 
 const popupTitle = computed(() => {
   if (popupStep.value === 'intro') return 'Welcome to Knowchain'
@@ -119,7 +114,6 @@ watch(
           @click="handleOpenConnect"
       >
         <Icon name="Wallet" :size="14"/>
-        <!-- 3. Отображение адреса или кнопки подключения -->
         <span v-if="!isConnected">Connect Wallet</span>
         <span v-else>{{ formatAddress(walletAddress) }}</span>
       </Button>
@@ -138,9 +132,8 @@ watch(
         <img src="../../../public/logo/logo_dark.svg" style="width: 126px; height: 112px" />
       </div>
 
-      <!-- 4. Динамический баланс -->
       <div class="balance">
-        {{ formattedBalance }} KNW
+        10.000 KNW
       </div>
 
       <Button variant="border" as="router-link" to="/ratings">
@@ -149,7 +142,7 @@ watch(
     </div>
   </main>
 
-  <BottomSheet
+  <BaseModal
       v-model="isPopupOpen"
       :title="popupTitle"
       :description="popupDescription"

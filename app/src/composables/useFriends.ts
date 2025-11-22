@@ -20,13 +20,14 @@ export function useFriends() {
     const MOCK_TOTAL = 57
     function makeMockFriend(id: number): FriendDTO {
         const names = ["Olrosa","Shadow","Blaze","Vortex","Phantom","Raven","Thunder","Nova","Echo","Storm"]
-        const name = names[id % names.length] + "#" + id
+        const name = names[id % names.length]
         const date = new Date()
         date.setDate(date.getDate() - (id * 3) % 400)
         return {
             id,
             // @ts-ignore
             avatarUrl: id % 4 === 0 ? null : `/avatars/${names[id % names.length].toLowerCase()}.png`,
+            // @ts-ignore
             name,
             joinedAt: date.toISOString(),
             balance: (id * 137) % 10000,
