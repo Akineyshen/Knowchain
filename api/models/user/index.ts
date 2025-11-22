@@ -16,22 +16,21 @@ export async function getUserByRawAddress(rawAddress: string): Promise<User | nu
 interface CreateUserOptions {
   name?: string | null;
   tokens?: number;
-  course_id?: string | null;
 }
 
 export async function createUserWithRawAddress(
   rawAddress: string,
   options: CreateUserOptions = {}
 ): Promise<User> {
-  const { name = null, tokens = 0, course_id = null } = options;
+  const { name = null, tokens = 0 } = options;
 
   const query = `
-    INSERT INTO users (raw_address, name, tokens, course_id)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users (raw_address, name, tokens)
+    VALUES ($1, $2, $3)
     RETURNING *;
   `;
 
-  const { rows } = await pool.query(query, [rawAddress, name, tokens, course_id]);
+  const { rows } = await pool.query(query, [rawAddress, name, tokens]);
   return rows[0];
 }
 

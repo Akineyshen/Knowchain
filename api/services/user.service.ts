@@ -10,7 +10,6 @@ import {
 interface LoginOptions {
   name?: string | null;
   tokens?: number;
-  course_id?: string | null;
 }
 
 export class UserService {

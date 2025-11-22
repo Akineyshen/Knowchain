@@ -5,7 +5,7 @@ import { RESPONSE_MESSAGES } from "../../constants";
 
 export const tonLogin = async (req: Request, res: Response) => {
   try {
-    const { raw_address, name, tokens, course_id } = req.body;
+    const { raw_address, name, tokens } = req.body;
 
     if (!raw_address) {
       return res.status(400).json({
@@ -16,8 +16,7 @@ export const tonLogin = async (req: Request, res: Response) => {
 
     const user = await UserService.loginWithRawAddress(raw_address, {
       name,
-      tokens,
-      course_id
+      tokens
     });
 
     const token = AuthService.generateToken(user);
@@ -35,7 +34,6 @@ export const tonLogin = async (req: Request, res: Response) => {
         raw_address: user.raw_address,
         name: user.name,
         tokens: user.tokens,
-        course_id: user.course_id,
         role: user.role
       }
     });
