@@ -8,43 +8,44 @@ import BottomSheet from "@components/BottomSheet/BottomSheet.vue"
 import { useTonConnect } from "@composables/useTonConnect"
 
 const isPopupOpen = ref(false)
-
 const popupStep = ref<'intro' | 'warning' | 'connect' | null>(null)
 
-const { isConnected, isInitialized, walletAddress, connectWallet, formatAddress } = useTonConnect()
+// 1. Достаем объект user из хука
+const {
+  isConnected,
+  isInitialized,
+  walletAddress,
+  connectWallet,
+  formatAddress,
+  user
+} = useTonConnect()
+
+// 2. Вычисляем баланс на основе данных пользователя
+const formattedBalance = computed(() => {
+  // Если пользователя нет или у него нет поля tokens — показываем 0
+  // (Предполагаем, что в интерфейсе User в authAPI.ts есть поле tokens: number)
+  const balance = user.value?.tokens || 0
+
+  // Форматируем число (например: 100000 -> 100,000)
+  return new Intl.NumberFormat('en-US').format(balance)
+})
 
 const popupTitle = computed(() => {
-  if (popupStep.value === 'intro') {
-    return 'Welcome to Knowchain'
-  }
-  if (popupStep.value === 'warning') {
-    return 'Continue in demo mode?'
-  }
-  if (popupStep.value === 'connect') {
-    return 'Connect your TON wallet'
-  }
+  if (popupStep.value === 'intro') return 'Welcome to Knowchain'
+  if (popupStep.value === 'warning') return 'Continue in demo mode?'
+  if (popupStep.value === 'connect') return 'Connect your TON wallet'
   return ''
 })
 
 const popupDescription = computed(() => {
-  if (popupStep.value === 'intro') {
-    return 'Link your wallet to save your progress and prevent losing access to your account'
-  }
-  if (popupStep.value === 'warning') {
-    return 'If you continue without connecting a wallet, you will get only a demo version of the app. Some features, rewards and cross-device progress will not be available'
-  }
-  if (popupStep.value === 'connect') {
-    return 'Link your TON wallet to unlock full functionality, save your progress and access on-chain features.'
-  }
+  if (popupStep.value === 'intro') return 'Link your wallet to save your progress and prevent losing access to your account'
+  if (popupStep.value === 'warning') return 'If you continue without connecting a wallet, you will get only a demo version of the app. Some features, rewards and cross-device progress will not be available'
+  if (popupStep.value === 'connect') return 'Link your TON wallet to unlock full functionality, save your progress and access on-chain features.'
   return ''
 })
 
 const showSecondary = computed(() => popupStep.value === 'intro' || popupStep.value === 'warning')
-
-const secondaryText = computed(() => {
-  return 'Continue without wallet'
-})
-
+const secondaryText = computed(() => 'Continue without wallet')
 const confirmText = computed(() => 'Connect wallet')
 
 const hasSeenWalletIntro = ref(false)
@@ -118,6 +119,7 @@ watch(
           @click="handleOpenConnect"
       >
         <Icon name="Wallet" :size="14"/>
+        <!-- 3. Отображение адреса или кнопки подключения -->
         <span v-if="!isConnected">Connect Wallet</span>
         <span v-else>{{ formatAddress(walletAddress) }}</span>
       </Button>
@@ -136,8 +138,9 @@ watch(
         <img src="../../../public/logo/logo_dark.svg" style="width: 126px; height: 112px" />
       </div>
 
+      <!-- 4. Динамический баланс -->
       <div class="balance">
-        100,000 KNW
+        {{ formattedBalance }} KNW
       </div>
 
       <Button variant="border">

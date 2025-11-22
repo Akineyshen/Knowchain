@@ -1,7 +1,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { toUserFriendlyAddress, type Wallet } from '@tonconnect/sdk'
 import { TonConnectUI } from '@tonconnect/ui'
-import { getTonProofPayload, tonLogin, type TonProofPayload } from "../services/authAPI.ts";
+import { tonLogin, getMe, type User } from "../services/authAPI"
 
 interface TonConnectState {
     wallet: Wallet | null
@@ -9,16 +9,19 @@ interface TonConnectState {
     address: string | null
     rawAddress: string | null
     initialized: boolean
+    user: User | null // Добавили поле для юзера
 }
 
 const tonConnectUI = ref<TonConnectUI | null>(null)
 
+// Глобальный стейт (вне функции, чтобы был общим для всего приложения)
 const state = ref<TonConnectState>({
     wallet: null,
     connected: false,
     address: null,
     rawAddress: null,
     initialized: false,
+    user: null
 })
 
 export function useTonConnect() {
@@ -26,79 +29,68 @@ export function useTonConnect() {
     const walletAddress = computed(() => state.value.address)
     const currentWallet = computed(() => state.value.wallet)
     const isInitialized = computed(() => state.value.initialized)
+    const user = computed(() => state.value.user) // Геттер для юзера
 
     const manifestUrl = `https://app.knowchain.eu/manifest/tonconnect-manifest.json`
 
-    const updateWalletState = (wallet: Wallet | null) => {
+    // Логика обновления стейта при изменении кошелька
+    const updateWalletState = async (wallet: Wallet | null) => {
         if (!wallet) {
+            // Сброс данных при отключении
             state.value.wallet = null
             state.value.connected = false
             state.value.address = null
             state.value.rawAddress = null
+            state.value.user = null
             return
         }
 
         const rawAddress = wallet.account.address
 
+        // Обновляем локальный стейт кошелька
         state.value.wallet = wallet
         state.value.connected = true
         state.value.rawAddress = rawAddress
         state.value.address = toUserFriendlyAddress(rawAddress)
-    }
 
-    const prepareTonProof = async () => {
-        if (!tonConnectUI.value) return
-
-        tonConnectUI.value.setConnectRequestParameters({ state: 'loading' })
-
+        // --- ЛОГИКА БЕКЕНДА ---
+        // 1. Если мы подключились, пробуем залогиниться на беке
         try {
-            const payload = await getTonProofPayload()
+            await tonLogin(rawAddress)
 
-            if (!payload) {
-                tonConnectUI.value.setConnectRequestParameters(null)
-                return
+            // 2. После успешного логина запрашиваем данные пользователя
+            const userData = await getMe()
+            if (userData) {
+                state.value.user = userData
             }
-
-            tonConnectUI.value.setConnectRequestParameters({
-                state: 'ready',
-                value: {
-                    tonProof: payload,
-                },
-            })
         } catch (e) {
-            console.error('Error in prepareTonProof', e)
-            tonConnectUI.value.setConnectRequestParameters(null)
+            console.error('Backend login failed:', e)
+            // Здесь можно добавить логику отображения ошибки (toast)
         }
     }
 
     const initTonConnect = async () => {
+        if (state.value.initialized) return // Защита от повторной инициализации
+
         try {
             tonConnectUI.value = new TonConnectUI({
                 manifestUrl
             })
 
+            // Подписываемся на изменения статуса
             tonConnectUI.value.onStatusChange(async (wallet) => {
-                updateWalletState(wallet)
-
-                if (
-                    wallet &&
-                    wallet.connectItems?.tonProof &&
-                    'proof' in wallet.connectItems.tonProof
-                ) {
-                    const proof = wallet.connectItems.tonProof.proof as TonProofPayload
-                    const rawAddress = wallet.account.address
-
-                    try {
-                        await tonLogin(rawAddress, proof)
-                    } catch (e) {
-                        console.error('Ton login error:', e)
-                    }
-                }
+                await updateWalletState(wallet)
             })
 
+            // Проверяем текущий статус при загрузке (если пользователь уже был подключен)
             const current = tonConnectUI.value.wallet
             if (current) {
-                updateWalletState(current)
+                await updateWalletState(current)
+            } else {
+                // Если кошелька нет, попробуем просто дернуть getMe, вдруг сессия кук жива
+                // (Опционально, зависит от логики вашего приложения)
+                const userData = await getMe()
+                if (userData) state.value.user = userData
             }
 
             state.value.initialized = true
@@ -113,15 +105,17 @@ export function useTonConnect() {
             console.error('TonConnectUI is not initialized')
             return
         }
-
         try {
-            void prepareTonProof()
-
             await tonConnectUI.value.openModal()
         } catch (error) {
-            console.error('TonConnectUI is not initialized')
-            throw error
+            console.error('Error opening modal:', error)
         }
+    }
+
+    const disconnectWallet = async () => {
+        if (!tonConnectUI.value) return
+        await tonConnectUI.value.disconnect()
+        // updateWalletState(null) сработает автоматически через onStatusChange
     }
 
     const formatAddress = (address: string | null ) => {
@@ -130,21 +124,24 @@ export function useTonConnect() {
     }
 
     onMounted(() => {
-        initTonConnect()
+        // Инициализируем только если еще не инициализировано
+        if (!tonConnectUI.value) {
+            initTonConnect()
+        }
     })
 
     return {
-        // Condition
+        // Состояние
         isConnected,
         walletAddress,
         currentWallet,
         isInitialized,
+        user, // Теперь компонент может делать const { user } = useTonConnect()
 
-        // Methods
+        // Методы
         connectWallet,
+        disconnectWallet,
         formatAddress,
-
-        // Utils
         initTonConnect,
     }
 }
