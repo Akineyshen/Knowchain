@@ -4,7 +4,7 @@ import Button from '@components/ui/Button/Button.vue'
 import Icon from '@components/ui/Icon/Icon.vue'
 import BaseModal from '@components/modals/BaseModal/BaseModal.vue'
 
-import { useRouletteGame } from './Roulette'
+import { useRouletteGame } from './Roulette.ts'
 
 const {
   segments,
@@ -66,7 +66,7 @@ const getLabelStyle = (angle: number) => ({
           <div class="roulette-pointer__shape">
             <img
                 class="roulette-pointer__logo"
-                src="../../../public/logo/logo_light.svg"
+                src="../../../../public/logo/logo_light.svg"
                 alt=""
             />
           </div>

@@ -1,4 +1,4 @@
-// Pairs.ts
+// PairsPage.ts
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 export interface PairCard {
@@ -174,7 +174,7 @@ export function usePairsGame() {
                 body: JSON.stringify({ pairs, points })
             })
         } catch (e) {
-            console.error('Ошибка отправки результата Pairs', e)
+            console.error('Ошибка отправки результата PairsPage', e)
         }
     }
 

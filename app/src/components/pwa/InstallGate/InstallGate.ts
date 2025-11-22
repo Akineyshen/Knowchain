@@ -18,7 +18,7 @@ export function useInstallGate() {
 
     // скриншоты на первом экране
     const screenshots = ref<string[]>([
-        '/screenshots/Home.png',
+        '/screenshots/HomePage.png',
         '/screenshots/Learning.png',
         '/screenshots/Minigames.png'
     ])

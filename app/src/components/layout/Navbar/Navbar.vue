@@ -6,7 +6,7 @@
   const tabs = [
     { key: 'home', label: 'Home', name: 'Home', path: '/' },
     { key: 'learn', label: 'Learn', name: 'Book', path: '/learn' },
-    { key: 'games', label: 'Games', name: 'Minigames', path: '/games' },
+    { key: 'games', label: 'GamesPage', name: 'Minigames', path: '/games' },
     { key: 'friends', label: 'Friends', name: 'Friends', path: '/friends'},
   ] as const
 

@@ -1,4 +1,4 @@
-// Roulette.ts
+// RoulettePage.ts
 import { ref, computed, onMounted } from 'vue'
 
 type PopupMode = 'info' | 'result'
@@ -72,7 +72,7 @@ export function useRouletteGame() {
                 body: JSON.stringify({ reward })
             })
         } catch (e) {
-            console.error('Ошибка отправки результата Roulette', e)
+            console.error('Ошибка отправки результата RoulettePage', e)
         }
     }
 

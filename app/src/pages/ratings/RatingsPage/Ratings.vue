@@ -4,8 +4,8 @@ import Button from '@components/ui/Button/Button.vue'
 import Icon from '@components/ui/Icon/Icon.vue'
 import UsersItem from '@components/users/UsersItem/UsersItem.vue'
 
-import { useRatings } from './Ratings'
-import { formatBalanceShort } from './Ratings'
+import { useRatings } from './Ratings.ts'
+import { formatBalanceShort } from './Ratings.ts'
 
 const { top3, others, currentUser } = useRatings()
 

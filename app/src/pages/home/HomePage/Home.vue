@@ -5,7 +5,7 @@ import Button from "@components/ui/Button/Button.vue"
 import Topbar from "@components/layout/Topbar/Topbar.vue"
 import Icon from "@components/ui/Icon/Icon.vue"
 import BaseModal from "@components/modals/BaseModal/BaseModal.vue"
-import { useTonConnect } from "@composables/useTonConnect"
+import { useTonConnect } from "@composables/useTonConnect.ts"
 
 const isPopupOpen = ref(false)
 const popupStep = ref<'intro' | 'warning' | 'connect' | null>(null)
@@ -103,7 +103,7 @@ watch(
   <Topbar>
     <template #left>
       <Button variant="circle" style="padding: 0">
-        <img src="../../assets/avatar/Avatar.png" alt="avatar" style="width: 52px; height: 52px"/>
+        <img src="../../../assets/avatar/Avatar.png" alt="avatar" style="width: 52px; height: 52px"/>
       </Button>
     </template>
 
@@ -129,7 +129,7 @@ watch(
   <main class="content">
     <div class="balance-card">
       <div class="logo">
-        <img src="../../../public/logo/logo_dark.svg" style="width: 126px; height: 112px" />
+        <img src="../../../../public/logo/logo_dark.svg" style="width: 8rem; height: 7rem" />
       </div>
 
       <div class="balance">

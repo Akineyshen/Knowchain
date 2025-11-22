@@ -48,7 +48,16 @@ html, body, #app {
 body {
   margin: 0;
   color: shared.$color-text-primary;
-  background: radial-gradient(80% 60% at 50% 0%, rgba(0,81,255,0.18) 0%, transparent 60%) #040718;
+  background: radial-gradient(
+                  280% 60% at 0% 0%,
+                  rgba(0, 81, 255, 0.24) 0%,
+                  rgba(0, 92, 241, 0.25) 25%,
+                  transparent 70%
+  ) #040718;
+
+
+
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
