@@ -81,8 +81,8 @@ onMounted(async () => {
       <Icon name="AddFriends" :size="24" />
       {{ isCopied ? 'Link copied' : 'Invite friends' }}
     </Button>
+    <Navbar />
   </div>
-  <Navbar />
 </template>
 
 <style scoped lang="scss" src="./Friends.scss"/>

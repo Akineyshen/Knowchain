@@ -1,4 +1,3 @@
-<!-- src/components/LoadingOverlay/LoadingOverlay.vue -->
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import { useAppLoading } from '@composables/useAppLoading.ts'

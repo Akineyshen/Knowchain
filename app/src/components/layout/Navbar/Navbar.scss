@@ -1,7 +1,22 @@
 @use '@shared/style/main.scss' as shared;
 
-.navbar {
+
+.navbar-wrapper {
   position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0 0 1rem 0;
+  background: rgba(4, 7, 24, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
+  pointer-events: none;
+}
+
+.navbar {
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
   bottom: 1rem;
@@ -18,7 +33,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 101;
-  margin-bottom: 1rem;
+  pointer-events: auto;
 }
 
 .navbar .tab {

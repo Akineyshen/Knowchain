@@ -57,19 +57,24 @@
 
 .actions {
   position: fixed;
-  bottom: 7rem;
+  bottom: 8rem;
   left: 0.1rem;
   right: 0.1rem;
   display: flex;
-  gap: 0.45rem;
+  flex-direction: column;
+  gap: 1rem;
   z-index: 100;
-  max-width: 45rem;
+  max-width: 47rem;
   margin: 0 auto;
+
+    @media (min-width: shared.$breakpoint-laptop) {
+        bottom: 7.5rem;
+    }
 }
 
 .invite-button {
-  flex: 1;
   padding: 0.75rem 1.5rem;
+  width: 100%;
   gap: 0.5rem;
   font-size: shared.$font-size-xl !important;
 }

@@ -4,7 +4,7 @@
   position: fixed;
   top: 1rem;
   left: 0; right: 0;
-  z-index: 800;
+  z-index: 99;
   padding: 1rem 1rem;
   pointer-events: none;
 }
@@ -23,9 +23,17 @@
   align-items: center;
 }
 
-.left { justify-content: flex-start; }
-.center { justify-content: center; }
-.right { justify-content: flex-end; }
+.left {
+  justify-content: flex-start;
+}
+.center {
+  justify-content: center;
+  font-size: shared.$font-size-base;
+  font-weight: shared.$font-weight-medium;
+}
+.right {
+  justify-content: flex-end;
+}
 
 @supports (top: env(safe-area-inset-top)) {
   .topbar { padding-top: max(12px, env(safe-area-inset-top)); }

@@ -16,9 +16,8 @@ export function useInstallGate() {
 
     let deferredPrompt: any = null
 
-    // скриншоты на первом экране
     const screenshots = ref<string[]>([
-        '/screenshots/HomePage.png',
+        '/screenshots/Home.png',
         '/screenshots/Learning.png',
         '/screenshots/Minigames.png'
     ])
