@@ -22,6 +22,7 @@ export default defineConfig({
           '@components': path.resolve(__dirname, './src/components'),
           '@composables': path.resolve(__dirname, './src/composables'),
           '@types': path.resolve(__dirname, './src/types'),
+          '@pages': path.resolve(__dirname, './src/pages'),
       },
     },
     server: {

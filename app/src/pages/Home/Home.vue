@@ -140,7 +140,7 @@ watch(
         100,000 KNW
       </div>
 
-      <Button variant="border">
+      <Button variant="border" as="router-link" to="/ratings">
         Your rank #57
       </Button>
     </div>
