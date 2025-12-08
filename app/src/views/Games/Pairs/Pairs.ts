@@ -1,5 +1,5 @@
-// PairsPage.ts
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
 
 export interface PairCard {
     id: number
@@ -14,6 +14,8 @@ const BOARD_SIZE = 16
 const PAIR_COUNT = BOARD_SIZE / 2
 const GAME_DURATION = 60
 const STORAGE_KEY = 'pairsLastPlayDate'
+
+const { awardTokens } = useAwardTokens()
 
 const BASE_SYMBOLS = [
     'ADA',
@@ -166,15 +168,20 @@ export function usePairsGame() {
         }
     }
 
-    async function sendScoreToBackend(pairs: number, points: number) {
+    async function sendScoreToBackend(_pairs: number, points: number) {
         try {
-            await fetch('/api/pairs/finish', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ pairs, points })
-            })
+            const updatedUser = await awardTokens(points)
+
+            if (updatedUser) {
+                console.log(`Awarded ${points} tokens — new balance:`, updatedUser.tokens)
+                popupDescription.value = `Your new balance: ${updatedUser.tokens ?? '—'} KNW`
+            } else {
+                console.warn('Tokens were not awarded (user not logged in or error)')
+                popupDescription.value = ''
+            }
         } catch (e) {
-            console.error('Ошибка отправки результата PairsPage', e)
+            console.error('Ошибка отправки результата Pairs', e)
+            popupDescription.value = ''
         }
     }
 

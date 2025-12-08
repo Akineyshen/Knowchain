@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-  import Icon from "@components/ui/Icon/Icon.vue";
-  import Button from "@components/ui/Button/Button.vue";
-  import Topbar from "@components/layout/Topbar/Topbar.vue";
+  import Icon from "@/components/ui/Icon/Icon.vue";
+  import Button from "@/components/ui/Button/Button.vue";
+  import Topbar from "@/components/layout/Topbar/Topbar.vue";
 </script>
 
 <template>

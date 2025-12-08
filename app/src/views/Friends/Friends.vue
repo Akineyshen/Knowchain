@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Navbar from "@components/layout/Navbar/Navbar.vue"
-import Button from "@components/ui/Button/Button.vue"
-import Icon from "@components/ui/Icon/Icon.vue"
-import UsersItem from "@components/users/UsersItem/UsersItem.vue"
+import Navbar from "@/components/layout/Navbar/Navbar.vue"
+import Button from "@/components/ui/Button/Button.vue"
+import Icon from "@/components/ui/Icon/Icon.vue"
+import UsersItem from "@/components/users/UsersItem/UsersItem.vue"
 import { onMounted, computed, ref } from 'vue'
-import { useFriends } from "@composables/useFriends.ts"
+import { useFriends } from "@/composables/useFriends.ts"
 
 const {
   friends,

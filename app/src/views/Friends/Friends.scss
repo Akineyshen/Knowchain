@@ -57,7 +57,7 @@
 
 .actions {
   position: fixed;
-  bottom: 8rem;
+  bottom: 7.5rem;
   left: 0.1rem;
   right: 0.1rem;
   display: flex;
@@ -67,8 +67,8 @@
   max-width: 47rem;
   margin: 0 auto;
 
-    @media (min-width: shared.$breakpoint-laptop) {
-        bottom: 7.5rem;
+    @media (min-width: shared.$breakpoint-mobile) {
+      bottom: 7rem;
     }
 }
 

@@ -1,29 +1,31 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
-import Navbar from "@components/layout/Navbar/Navbar.vue"
-import Button from "@components/ui/Button/Button.vue"
-import Topbar from "@components/layout/Topbar/Topbar.vue"
-import Icon from "@components/ui/Icon/Icon.vue"
-import BaseModal from "@components/modals/BaseModal/BaseModal.vue"
-import { useTonConnect } from "@composables/useTonConnect.ts"
+import Navbar from "@/components/layout/Navbar/Navbar.vue"
+import Button from "@/components/ui/Button/Button.vue"
+import Topbar from "@/components/layout/Topbar/Topbar.vue"
+import Icon from "@/components/ui/Icon/Icon.vue"
+import BaseModal from "@/components/modals/BaseModal/BaseModal.vue"
+import { useTonConnect } from "@/composables/ton/useTonConnect.ts"
+import { useUserStore } from '@/stores/useUserStore.ts'
 
 const isPopupOpen = ref(false)
 const popupStep = ref<'intro' | 'warning' | 'connect' | null>(null)
 
-// 1. Достаем объект user из хука
 const {
   isConnected,
   isInitialized,
   walletAddress,
   connectWallet,
   formatAddress,
-  // user
+  // user — оставляем, но не используем для баланса
 } = useTonConnect()
 
-// const formattedBalance = computed(() => {
-//   const balance = user.value?.tokens || 0
-//   return new Intl.NumberFormat('en-US').format(balance)
-// })
+const userStore = useUserStore()
+
+const formattedBalance = computed(() => {
+  const balance = userStore.user?.tokens || 0
+  return new Intl.NumberFormat('en-US').format(balance)
+})
 
 const popupTitle = computed(() => {
   if (popupStep.value === 'intro') return 'Welcome to Knowchain'
@@ -103,7 +105,7 @@ watch(
   <Topbar>
     <template #left>
       <Button variant="circle" style="padding: 0">
-        <img src="../../../assets/avatar/Avatar.png" alt="avatar" style="width: 52px; height: 52px"/>
+        <img src="../../assets/avatar/Avatar.png" alt="avatar" style="width: 52px; height: 52px"/>
       </Button>
     </template>
 
@@ -129,11 +131,11 @@ watch(
   <main class="content">
     <div class="balance-card">
       <div class="logo">
-        <img src="../../../../public/logo/logo_dark.svg" style="width: 8rem; height: 7rem" />
+        <img src="../../../public/logo/logo_dark.svg" style="width: 8rem; height: 7rem" />
       </div>
 
       <div class="balance">
-        10.000 KNW
+        {{ formattedBalance }} KNW
       </div>
 
       <Button variant="border" as="router-link" to="/ratings">

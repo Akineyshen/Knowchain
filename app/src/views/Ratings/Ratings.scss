@@ -96,40 +96,38 @@
 }
 
 .ratings-podium-name {
-  margin-top: 10px;
-  font-size: 16px;
-  font-weight: 600;
+  margin-top: 1.5rem;
+  font-size: shared.$font-size-lg;
+  font-weight: shared.$font-weight-medium;
+  color: shared.$color-neutral-100;
 }
 
 .ratings-podium-balance {
-  font-size: 14px;
-  opacity: 0.85;
+  font-size: shared.$font-size-base;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.5rem;
+  font-weight: shared.$font-weight-regular;
+  color: shared.$color-neutral-300;
+  margin-top: 0.25rem;
 }
 
-/* маленький токен-логотип справа от баланса */
 .ratings-token-icon {
-  width: 16px;
-  height: 16px;
-  border-radius: 999px;
+  width: 1rem;
+  height: 1rem;
 }
-
-/* ====== LIST ====== */
 
 .ratings-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-bottom: 96px; // чтобы не уезжало под плавающий бар
+  padding-bottom: 1rem;
 }
 
 .ratings-row {
   display: grid;
   grid-template-columns: 24px 1fr auto;
   align-items: center;
-  column-gap: 12px;
+  column-gap: 0.75rem;
 }
 
 .ratings-row__rank {
@@ -171,13 +169,12 @@
 
 .ratings-me-card {
   pointer-events: auto;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.95);
-  padding: 10px 20px;
+  border-radius: shared.$radius-xl;
+  background: #121423;
+  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
 }
 
 .ratings-me-left {

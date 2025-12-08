@@ -1,7 +1,9 @@
 // clicker.ts
 import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
+import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
 
-const GAME_DURATION = 60 // секунд
+const GAME_DURATION = 60
+const { awardTokens } = useAwardTokens()
 
 type PopupMode = 'info' | 'result'
 
@@ -11,13 +13,11 @@ export function useClickerGame() {
     const remainingTime = ref(GAME_DURATION)
     const isSending = ref(false)
 
-    // попап
     const isPopupOpen = ref(false)
     const popupTitle = ref('Clicker')
     const popupDescription = ref('')
     const popupMode = ref<PopupMode>('info')
 
-    // лимит 1 раз в день
     const hasPlayedToday = ref(false)
 
     let timerId: number | null = null
@@ -83,7 +83,6 @@ export function useClickerGame() {
             hasPlayedToday.value = true
         } finally {
             isSending.value = false
-            // попап с наградой
             popupMode.value = 'result'
             popupTitle.value = `Congrats! You earned ${finalScore} points today.`
             popupDescription.value = '' // без описания
@@ -91,17 +90,20 @@ export function useClickerGame() {
         }
     }
 
-    async function sendScoreToBackend(finalScore: number) {
+    async function sendScoreToBackend(points: number) {
         try {
-            await fetch('/api/clicker/finish', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ score: finalScore })
-            })
+            const updatedUser = await awardTokens(points)
+
+            if (updatedUser) {
+                console.log(`Awarded ${points} tokens — new balance:`, updatedUser.tokens)
+                popupDescription.value = `Your new balance: ${updatedUser.tokens ?? '—'} KNW`
+            } else {
+                console.warn('Tokens were not awarded (user not logged in or error)')
+                popupDescription.value = ''
+            }
         } catch (e) {
-            console.error('Ошибка отправки результата кликера', e)
+            console.error('Ошибка отправки результата Pairs', e)
+            popupDescription.value = ''
         }
     }
 

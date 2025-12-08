@@ -1,15 +1,23 @@
 <script setup lang="ts">
-import Topbar from '@components/layout/Topbar/Topbar.vue'
-import Button from '@components/ui/Button/Button.vue'
-import Icon from '@components/ui/Icon/Icon.vue'
-import UsersItem from '@components/users/UsersItem/UsersItem.vue'
+import Topbar from '@/components/layout/Topbar/Topbar.vue'
+import Button from '@/components/ui/Button/Button.vue'
+import Icon from '@/components/ui/Icon/Icon.vue'
+import UsersItem from '@/components/users/UsersItem/UsersItem.vue'
 
 import { useRatings } from './Ratings.ts'
 import { formatBalanceShort } from './Ratings.ts'
+import BaseModal from "@/components/modals/BaseModal/BaseModal.vue";
+import {ref} from "vue";
 
 const { top3, others, currentUser } = useRatings()
 
 const safeAvatar = (src?: string | null) => src || '/avatars/default.png'
+
+const isPopupOpen = ref(false)
+
+function openInfoSheet() {
+  isPopupOpen.value = true
+}
 </script>
 
 <template>
@@ -26,14 +34,13 @@ const safeAvatar = (src?: string | null) => src || '/avatars/default.png'
       </template>
 
       <template #right>
-        <Button variant="circle">
+        <Button variant="circle" @click="openInfoSheet">
           <Icon name="Info" :filled="false" :size="24" />
         </Button>
       </template>
     </Topbar>
 
     <main class="ratings-content">
-      <!-- TOP 3 -->
       <section class="ratings-podium">
         <div
             v-for="user in top3"
@@ -46,22 +53,18 @@ const safeAvatar = (src?: string | null) => src || '/avatars/default.png'
             <div
                 class="ratings-podium-badge"
                 :class="`ratings-podium-badge--${user.rank}`"
-            >
-              {{ user.rank }}
+            > {{ user.rank }}
             </div>
           </div>
 
-          <div class="ratings-podium-name">
-            {{ user.name }}
-          </div>
+          <div class="ratings-podium-name">{{ user.name }}</div>
           <div class="ratings-podium-balance">
             {{ formatBalanceShort(user.balance) }}
-            <span class="ratings-token-icon" />
+            <img class="ratings-token-icon" src="/logo/logo_dark.svg" />
           </div>
         </div>
       </section>
 
-      <!-- LIST -->
       <section class="ratings-list">
         <div
             v-for="user in others"
@@ -79,38 +82,29 @@ const safeAvatar = (src?: string | null) => src || '/avatars/default.png'
               :date="''"
               :balance="user.balance"
           />
-
-          <div class="ratings-row__score">
-            {{ formatBalanceShort(user.balance) }}
-            <img src="/logo/logo_dark.svg" class="ratings-token-icon" />
-          </div>
         </div>
       </section>
-
-      <!-- FLOATING CURRENT USER -->
-      <section
-          v-if="currentUser"
-          class="ratings-me"
-      >
+      <section v-if="currentUser" class="ratings-me">
         <div class="ratings-me-card">
           <div class="ratings-me-left">
             <div class="ratings-me-avatar">
-              <img
-                  :src="safeAvatar(currentUser.avatar)"
-                  :alt="currentUser.name"
-              />
+              <img :src="safeAvatar(currentUser.avatar)" :alt="currentUser.name"/>
             </div>
-            <div class="ratings-me-name">
-              {{ currentUser.name }}
-            </div>
+            <div class="ratings-me-name">{{ currentUser.name }}</div>
           </div>
 
-          <div class="ratings-me-rank">
-            #{{ currentUser.rank }}
-          </div>
+          <div class="ratings-me-rank">#{{ currentUser.rank }}</div>
         </div>
       </section>
     </main>
+
+    <BaseModal
+        v-model="isPopupOpen"
+        title="Rating"
+        description="The ranking reflects your activity and achievements in the game. Complete tasks and go through lessons to earn points and make it into the top 100. Compete with other players and show who’s the best."
+        confirm-text="OK"
+        :closeOnConfirm="true"
+    />
   </div>
 </template>
 

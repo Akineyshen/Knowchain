@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Topbar from '@components/layout/Topbar/Topbar.vue'
-import Button from '@components/ui/Button/Button.vue'
-import Icon from '@components/ui/Icon/Icon.vue'
-import BaseModal from '@components/modals/BaseModal/BaseModal.vue'
+import Topbar from '@/components/layout/Topbar/Topbar.vue'
+import Button from '@/components/ui/Button/Button.vue'
+import Icon from '@/components/ui/Icon/Icon.vue'
+import BaseModal from '@/components/modals/BaseModal/BaseModal.vue'
 
 import { usePairsGame } from './Pairs.ts'
 

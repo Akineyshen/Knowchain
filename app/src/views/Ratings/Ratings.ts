@@ -35,6 +35,12 @@ const MOCK_USERS: RatingUser[] = [
     { id: 5, name: 'Klyra', balance: 44_000, avatar: '/logo/icon-192.png' },
     { id: 6, name: 'Taren', balance: 42_000, avatar: '/logo/icon-192.png' },
     { id: 7, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 8, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 9, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 10, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 11, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 12, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
+    { id: 13, name: 'Rynex', balance: 39_000, avatar: '/logo/icon-192.png' },
     {
         id: 99,
         name: 'Zerith',

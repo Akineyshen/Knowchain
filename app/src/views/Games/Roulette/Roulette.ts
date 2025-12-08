@@ -1,5 +1,6 @@
-// RoulettePage.ts
+// Roulette.ts
 import { ref, computed, onMounted } from 'vue'
+import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
 
 type PopupMode = 'info' | 'result'
 
@@ -9,6 +10,7 @@ const SEGMENT_COUNT = SEGMENT_VALUES.length
 const SEGMENT_ANGLE = 360 / SEGMENT_COUNT
 const SPIN_DURATION = 4000 // ms
 const STORAGE_KEY = 'rouletteLastPlayDate'
+const { awardTokens } = useAwardTokens()
 
 export function useRouletteGame() {
     const wheelRotation = ref(0)
@@ -52,7 +54,7 @@ export function useRouletteGame() {
 
         try {
             isSending.value = true
-            await sendResultToBackend(reward)
+            await sendScoreToBackend(reward)
             localStorage.setItem(STORAGE_KEY, today)
             hasPlayedToday.value = true
         } finally {
@@ -64,15 +66,20 @@ export function useRouletteGame() {
         }
     }
 
-    async function sendResultToBackend(reward: number) {
+    async function sendScoreToBackend(points: number) {
         try {
-            await fetch('/api/roulette/spin', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ reward })
-            })
+            const updatedUser = await awardTokens(points)
+
+            if (updatedUser) {
+                console.log(`Awarded ${points} tokens — new balance:`, updatedUser.tokens)
+                popupDescription.value = `Your new balance: ${updatedUser.tokens ?? '—'} KNW`
+            } else {
+                console.warn('Tokens were not awarded (user not logged in or error)')
+                popupDescription.value = ''
+            }
         } catch (e) {
-            console.error('Ошибка отправки результата RoulettePage', e)
+            console.error('Ошибка отправки результата Pairs', e)
+            popupDescription.value = ''
         }
     }
 
