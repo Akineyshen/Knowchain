@@ -5,12 +5,12 @@
 }
 
 html {
-  overflow-y: auto;          /* прокрутка разрешена */
-  -ms-overflow-style: none;  /* IE/старый Edge */
-  scrollbar-width: none;     /* Firefox */
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 html::-webkit-scrollbar {
-  display: none;             /* Chrome/Edge/Safari */
+  display: none;
 }
 
 * {

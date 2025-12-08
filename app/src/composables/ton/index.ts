@@ -1,0 +1,1 @@
+export { useTonConnect } from './useTonConnect'

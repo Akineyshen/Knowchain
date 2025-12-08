@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LessonNode from '@components/learn/LessonNode/LessonNode.vue'
+import LessonNode from '@/components/learn/LessonNode/LessonNode.vue'
 
 type LessonStatus = 'completed' | 'active' | 'locked'
 type LessonKind = 'test' | 'theory'
@@ -132,7 +132,11 @@ const nodes: Node[] = [
         class="learn-path__node"
         :style="{ top: `${node.y}px`, left: `${node.x}px` }"
     >
-      <LessonNode :status="node.status" :kind="node.kind">
+      <LessonNode
+          :status="node.status"
+          :kind="node.kind"
+          :lesson-id="node.id"
+      >
         {{ node.label }}
       </LessonNode>
     </div>

@@ -1,19 +1,40 @@
 <script setup lang="ts">
-import Icon from '@components/ui/Icon/Icon.vue'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import Icon from '@/components/ui/Icon/Icon.vue'
+import LearnModal from '@/components/modals/LearnModal/LearnModal.vue'
 
 type LessonStatus = 'completed' | 'active' | 'locked'
+type LessonKind = 'test' | 'theory'
 
-defineProps<{
+const props = defineProps<{
   status: LessonStatus
+  kind: LessonKind
+  lessonId: number | string
 }>()
+
+const router = useRouter()
+const isModalOpen = ref(false)
+
+function handleNodeClick() {
+  if (props.status === 'active') {
+    isModalOpen.value = true
+  }
+}
+
+function handleStartLesson() {
+  isModalOpen.value = false
+  router.push({ name: 'Lesson', params: { id: String(props.lessonId) } })
+}
 </script>
 
 <template>
   <button
-    class="lesson-node"
-    :class="[`lesson-node--${status}`]"
-    type="button"
-    :disabled="status === 'locked'"
+      class="lesson-node"
+      :class="[`lesson-node--${status}`, `lesson-node--${kind}`]"
+      type="button"
+      :disabled="status === 'locked'"
+      @click="handleNodeClick"
   >
     <span class="lesson-node__ring">
       <span class="lesson-node__circle">
@@ -33,10 +54,22 @@ defineProps<{
       </span>
     </span>
 
+    <div v-if="status === 'active'" class="lesson-node__tooltip">Start</div>
+
     <span class="lesson-node__label">
       <slot />
     </span>
   </button>
+
+  <Teleport to="body">
+    <LearnModal
+        v-if="isModalOpen"
+        title="Bitcoin Basics"
+        description="This lesson will teach you the fundamentals of Bitcoin, including how it works and why it's important."
+        @close="isModalOpen = false"
+        @start="handleStartLesson"
+    />
+  </Teleport>
 </template>
 
 <style scoped lang="scss" src="./LessonNode.scss" />

@@ -1,16 +1,21 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import './style.scss'
 import App from './App.vue'
 import router from './router'
 import { registerSW } from 'virtual:pwa-register'
-import { useAppLoading } from '@composables/useAppLoading'
 
 registerSW({ immediate: true })
 
-const { finishLoading } = useAppLoading()
-
 const app = createApp(App)
+
+const pinia = createPinia()
+app.use(pinia)
+
 app.use(router)
+
+import { useAppLoading } from '@/composables/ui/useAppLoading.ts'
+const { finishLoading } = useAppLoading()
 
 app.mount('#app')
 

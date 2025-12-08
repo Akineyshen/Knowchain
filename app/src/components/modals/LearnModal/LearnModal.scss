@@ -1,0 +1,55 @@
+@use "@shared/style/main.scss" as shared;
+
+.learn-modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 299;
+}
+
+.learn-modal {
+  background-color: #121423;
+  border-radius: shared.$radius-xl;
+  padding: 1.5rem;
+  width: 15rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  border: 1px solid shared.$color-neutral-700;
+}
+
+.learn-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.learn-modal__title {
+  font-size: shared.$font-size-lg;
+  font-weight: shared.$font-weight-semibold;
+  color: shared.$color-neutral-100;
+}
+
+.learn-modal__description {
+  font-size: shared.$font-size-sm;
+  color: shared.$color-neutral-400;
+  font-weight: shared.$font-weight-light;
+}
+
+.learn-modal__footer {
+  display: flex;
+}
+
+.learn-modal__start-btn {
+  width: 100%;
+  background-color: shared.$color-blue-700;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: shared.$font-size-base;
+  font-weight: shared.$font-weight-medium;
+  border-radius: shared.$radius-xl;
+  cursor: pointer;
+}

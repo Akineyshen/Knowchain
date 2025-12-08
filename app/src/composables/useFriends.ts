@@ -1,6 +1,6 @@
 import { ref, computed } from "vue"
-// import { fetchFriends, fetchFriendsStats, fetchReferralLink } from "../services/friends.api"
-import type { FriendDTO } from "../types/friends.ts"
+// import { fetchFriends, fetchFriendsStats, fetchReferralLink } from "../services/Friends.api"
+import type { FriendDTO } from "@/types/friends.ts"
 
 export function useFriends() {
     const isLoadingList = ref(false)
@@ -51,7 +51,7 @@ export function useFriends() {
             friends.value = reset ? items : [...friends.value, ...items]
             page.value += 1
         } catch (e: any) {
-            error.value = e?.message || "Failed to load friends"
+            error.value = e?.message || "Failed to load Friends"
         } finally {
             isLoadingList.value = false
         }

@@ -3,7 +3,7 @@ import type {
     FriendsListResponse,
     FriendsStatsResponse,
     ReferralLinkResponse,
-} from "../types/friends";
+} from "@/types/friends";
 
 export function fetchFriends(params: {
     page?: number;

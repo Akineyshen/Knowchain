@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
     "@tonconnect/sdk": "^3.3.1",
     "@tonconnect/ui": "^2.3.1",
+    "pinia": "^3.0.4",
     "vue": "^3.5.22",
     "vue-i18n": "^11.1.12",
     "vue-router": "^4"

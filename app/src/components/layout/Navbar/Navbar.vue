@@ -1,13 +1,13 @@
 <script setup lang="ts">
   import { computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
-  import Icon from "@components/ui/Icon/Icon.vue"
+  import Icon from "@/components/ui/Icon/Icon.vue"
 
   const tabs = [
-    { key: 'home', label: 'Home', name: 'Home', path: '/' },
-    { key: 'learn', label: 'Learn', name: 'Book', path: '/learn' },
+    { key: 'Home', label: 'Home', name: 'Home', path: '/' },
+    { key: 'Learn', label: 'Learn', name: 'Book', path: '/Learn' },
     { key: 'games', label: 'Games', name: 'Minigames', path: '/games' },
-    { key: 'friends', label: 'Friends', name: 'Friends', path: '/friends'},
+    { key: 'friends', label: 'Friends', name: 'Friends', path: '/Friends'},
   ] as const
 
   const router = useRouter()
@@ -16,7 +16,7 @@
   const activeKey = computed(() => {
     const currentPath = route.path
     const tab = tabs.find(t => t.path === currentPath)
-    return tab?.key || 'home'
+    return tab?.key || 'Home'
   })
 
   function onTabClick(path: string) {

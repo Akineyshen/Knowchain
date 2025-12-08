@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue'
-import Button from '@components/ui/Button/Button.vue'
+import Button from '@/components/ui/Button/Button.vue'
 
 interface Props {
   modelValue: boolean

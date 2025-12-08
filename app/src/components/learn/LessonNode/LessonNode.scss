@@ -38,6 +38,7 @@ $locked-bg: #262633;
     .lesson-node__circle {
       background: shared.$color-yellow-800;
       border: 0.25rem solid shared.$color-yellow-600;
+      margin-top: 0.5rem;
     }
   }
 
@@ -47,4 +48,30 @@ $locked-bg: #262633;
       border: 0.25rem solid shared.$color-neutral-300;
     }
   }
+}
+
+.lesson-node__tooltip {
+  position: relative;
+  margin-top: 0.5rem;
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 4px 12px;
+  border-radius: shared.$radius-md;
+  font-size: shared.$font-size-xs;
+  font-weight: shared.$font-weight-regular;
+  white-space: nowrap;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #ffffff;
+  }
+
 }

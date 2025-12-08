@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import { useAppLoading } from '@composables/useAppLoading.ts'
+import { useAppLoading } from '@/composables/ui/useAppLoading.ts'
 
 const { isAppLoading } = useAppLoading()
 

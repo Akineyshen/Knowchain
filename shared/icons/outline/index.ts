@@ -26,7 +26,6 @@ export { default as Collapse } from './arrows/scale/Collapse.vue'
 export { default as Expand } from './arrows/scale/Expand.vue'
 
 // Other
-export { default as Book } from './Book.vue'
 export { default as Star } from './Star.vue'
 export { default as Users } from './Users.vue'
 export { default as Menu } from './Menu.vue'
