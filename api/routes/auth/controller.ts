@@ -21,12 +21,13 @@ export const tonLogin = async (req: Request, res: Response) => {
 
     const token = AuthService.generateToken(user);
 
-    res.cookie("token", token, {
+    res.cookie('token', token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24 * 30
-    });
+      secure: true,        // ОБЯЗАТЕЛЬНО (у тебя HTTPS)
+      sameSite: 'none',    // КРИТИЧНО
+      maxAge: 1000 * 60 * 60 * 24 * 30,
+      path: '/'
+    })
 
     return res.json({
       user: {
