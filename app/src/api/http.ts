@@ -11,7 +11,7 @@ async function request<R = any>(
     body?: any,
     opts: RequestInit = {}
 ): Promise<R> {
-    const base = (import.meta as any).env?.VITE_API_BASE_URL ?? 'http://localhost:3001'
+    const base = (import.meta as any).env?.VITE_API_BASE_URL ?? 'https://knowchain-px47.onrender.com'
     const url = path.startsWith('http') ? path : `${base}${path}`
 
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null

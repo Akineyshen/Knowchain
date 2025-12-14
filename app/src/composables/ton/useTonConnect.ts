@@ -30,7 +30,7 @@ export function useTonConnect() {
     const isInitialized = computed(() => state.value.initialized)
     const user = computed(() => state.value.user)
 
-    const manifestUrl = "https://ton-connect.github.io/demo-dapp-with-react-ui/tonconnect-manifest.json"
+    const manifestUrl = "https://knowchain.eu/tonconnect-manifest.json"
 
     const updateWalletState = async (wallet: Wallet | null) => {
         if (!wallet) {

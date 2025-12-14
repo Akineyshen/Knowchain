@@ -21,15 +21,8 @@ export const tonLogin = async (req: Request, res: Response) => {
 
     const token = AuthService.generateToken(user);
 
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,        // ОБЯЗАТЕЛЬНО (у тебя HTTPS)
-      sameSite: 'none',    // КРИТИЧНО
-      maxAge: 1000 * 60 * 60 * 24 * 30,
-      path: '/'
-    })
-
     return res.json({
+      token,
       user: {
         id: user.id,
         raw_address: user.raw_address,
@@ -38,6 +31,7 @@ export const tonLogin = async (req: Request, res: Response) => {
         role: user.role
       }
     });
+
   } catch (err: any) {
     console.error("TON login error:", err);
 
