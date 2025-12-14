@@ -1,6 +1,7 @@
 import { pool } from "../../config/db";
 import { Course } from "../../types/course";
 import { UserCourse } from "../../types/userCourse";
+import * as lessonModel from '../lesson'
 
 export async function getAvailableCourses(): Promise<Course[]> {
     const query = `
@@ -80,23 +81,37 @@ export async function updateUserCourseOnLessonStart(
 export async function updateUserCourseOnLessonComplete(
     userId: string,
     courseId: string,
+    lessonId: string,
     pointsAwarded: number
 ): Promise<UserCourse> {
     const query = `
-        UPDATE user_courses
-        SET
-            earned_points = earned_points + $3,
-            completed_lessons_count = completed_lessons_count + 1,
-            current_lesson_id = NULL 
-        WHERE user_id = $1 AND course_id = $2
-        RETURNING *;
-    `;
-    const { rows } = await pool.query(query, [userId, courseId, pointsAwarded]);
-    if (rows.length === 0) {
-        throw new Error("User course record not found for completion.");
+    UPDATE user_courses
+    SET
+      earned_points = earned_points + $4,
+      completed_lessons_count = completed_lessons_count + 1,
+      current_lesson_id = NULL,
+      status = 'completed'
+    WHERE user_id = $1
+      AND course_id = $2
+      AND current_lesson_id = $3
+    RETURNING *;
+  `
+
+    const { rows } = await pool.query(query, [
+        userId,
+        courseId,
+        lessonId,
+        pointsAwarded,
+    ])
+
+    if (!rows.length) {
+        throw new Error('User course not updated')
     }
-    return rows[0];
+
+    return rows[0]
 }
+
+
 
 export async function updateUserCourseStatus(
     userId: string,

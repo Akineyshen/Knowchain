@@ -1,4 +1,4 @@
-import { useHttp } from '@composables/http/useHttp.ts'
+import { useHttp } from '@/api'
 import { useUserStore } from '@/stores/useUserStore.ts'
 
 export interface UserPayload {

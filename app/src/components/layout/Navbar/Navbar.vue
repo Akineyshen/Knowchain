@@ -4,10 +4,10 @@
   import Icon from "@/components/ui/Icon/Icon.vue"
 
   const tabs = [
-    { key: 'Home', label: 'Home', name: 'Home', path: '/' },
-    { key: 'Learn', label: 'Learn', name: 'Book', path: '/Learn' },
-    { key: 'games', label: 'Games', name: 'Minigames', path: '/games' },
-    { key: 'friends', label: 'Friends', name: 'Friends', path: '/Friends'},
+    { key: 'Home', label: 'Główna', name: 'Home', path: '/' },
+    { key: 'Learn', label: 'Nauka', name: 'Book', path: '/learn' },
+    { key: 'games', label: 'Gry', name: 'Minigames', path: '/games' },
+    { key: 'withdraw', label: 'Wypłacić', name: 'Wallet', path: '/withdraw'},
   ] as const
 
   const router = useRouter()

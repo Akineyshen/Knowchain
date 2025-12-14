@@ -1,5 +1,5 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
+import { useAwardTokens } from "@/composables/award/useAwardTokens.ts";
 
 export interface PairCard {
     id: number
@@ -162,7 +162,7 @@ export function usePairsGame() {
         } finally {
             isSending.value = false
             popupMode.value = 'result'
-            popupTitle.value = `Congrats! You earned ${finalScore} points today.`
+            popupTitle.value = `Gratulacje! Zdobyłeś dziś ${finalScore} punktów.`
             popupDescription.value = ''
             isPopupOpen.value = true
         }
@@ -252,9 +252,9 @@ export function usePairsGame() {
 
     function openInfoSheet() {
         popupMode.value = 'info'
-        popupTitle.value = 'Pairs'
+        popupTitle.value = 'Pary'
         popupDescription.value =
-            'You have one minute to find as many pairs as possible. Each pair earns you 100 points, which are converted into rewards for your balance.'
+            'Masz jedną minutę, aby znaleźć jak najwięcej par. Każda para daje 100 punktów, które są przeliczane na nagrody dodawane do Twojego salda.'
         isPopupOpen.value = true
     }
 

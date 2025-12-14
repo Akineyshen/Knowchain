@@ -28,17 +28,17 @@
 
       <div class="buttons">
         <Button variant="primary" class="btn-primary" @click="handleInstallClick">
-          Download
+          Pobierz
         </Button>
         <Button variant="ghost" class="btn-ghost" @click="continueInBrowser">
-          Continue in browser
+          Kontynuuj w przeglądarce
         </Button>
       </div>
 
-      <h2 class="section-title">About Knowchain</h2>
+      <h2 class="section-title">O Knowchain</h2>
       <p class="description">
-        Learn, play mini-games, and earn tokens for knowledge. Install the app
-        on your home screen and use Knowchain as a native mobile app.
+        Ucz się, graj w minigry i zdobywaj tokeny za wiedzę. Zainstaluj aplikację
+        na ekranie głównym i korzystaj z Knowchain jak z natywnej aplikacji mobilnej.
       </p>
 
       <div v-if="screenshots.length" class="screenshots">
@@ -54,7 +54,7 @@
 
     <div v-if="showIosHelp" class="modal-backdrop">
       <div class="modal">
-        <h2>How to install on iPhone/iPad</h2>
+        <h2>Jak zainstalować na iPhone/iPad</h2>
 
         <div v-if="iosInstructionImages.length" class="modal-images">
           <img
@@ -66,20 +66,20 @@
         </div>
 
         <ol>
-          <li>Press the button <strong>«Share»</strong> at the bottom (square with an arrow).</li>
-          <li>Scroll through the list and select <strong>«Add to Home Screen»</strong>.</li>
-          <li>Click <strong>«Add»</strong> in the upper right corner.</li>
+          <li>Naciśnij przycisk <strong>«Udostępnij»</strong> na dole ekranu (kwadrat ze strzałką).</li>
+          <li>Przewiń listę i wybierz <strong>«Dodaj do ekranu głównego»</strong>.</li>
+          <li>Kliknij <strong>«Dodaj»</strong> w prawym górnym rogu.</li>
         </ol>
         <p class="hint">
-          After adding, launch Knowchain from the icon on the Home screen.
+          Po dodaniu uruchom Knowchain z ikony na ekranie głównym.
         </p>
-        <button class="modal-btn" @click="showIosHelp = false">Done</button>
+        <button class="modal-btn" @click="showIosHelp = false">Gotowe</button>
       </div>
     </div>
 
     <div v-if="showAndroidHelp" class="modal-backdrop">
       <div class="modal">
-        <h2>How to install on Android</h2>
+        <h2>Jak zainstalować na Androidzie</h2>
 
         <div v-if="androidInstructionImages.length" class="modal-images">
           <img
@@ -91,18 +91,18 @@
         </div>
 
         <ol>
-          <li>In the browser window that appears, click <strong>«Download»</strong>.</li>
+          <li>W wyświetlonym oknie przeglądarki kliknij <strong>«Pobierz»</strong>.</li>
           <li>
-            If the window does not appear, open the browser menu (⋮) and select
-            <strong>«Add to home screen»</strong> or
-            <strong>«Install the application»</strong>.
+            Jeśli okno się nie pojawi, otwórz menu przeglądarki (⋮) i wybierz
+            <strong>«Dodaj do ekranu głównego»</strong> lub
+            <strong>«Zainstaluj aplikację»</strong>.
           </li>
-          <li>Confirm the installation.</li>
+          <li>Potwierdź instalację.</li>
         </ol>
         <p class="hint">
-          After installation, open Knowchain from the icon on your home screen.
+          Po instalacji otwórz Knowchain z ikony na ekranie głównym.
         </p>
-        <button class="modal-btn" @click="showAndroidHelp = false">Done</button>
+        <button class="modal-btn" @click="showAndroidHelp = false">Gotowe</button>
       </div>
     </div>
   </div>

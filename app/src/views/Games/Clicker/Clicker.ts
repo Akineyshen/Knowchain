@@ -1,6 +1,6 @@
 // clicker.ts
 import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
-import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
+import { useAwardTokens } from "@/composables/award/useAwardTokens.ts";
 
 const GAME_DURATION = 60
 const { awardTokens } = useAwardTokens()
@@ -84,7 +84,7 @@ export function useClickerGame() {
         } finally {
             isSending.value = false
             popupMode.value = 'result'
-            popupTitle.value = `Congrats! You earned ${finalScore} points today.`
+            popupTitle.value = `Gratulacje! Zdobyłeś dziś ${finalScore} punktów.`
             popupDescription.value = '' // без описания
             isPopupOpen.value = true
         }
@@ -113,9 +113,9 @@ export function useClickerGame() {
 
     function openInfoSheet() {
         popupMode.value = 'info'
-        popupTitle.value = 'Clicker'
+        popupTitle.value = 'Kliker'
         popupDescription.value =
-            'You have 60 seconds to tap the button as many times as you can. Each tap gives you points that are converted into rewards for your balance.'
+            'Masz 60 sekund, aby klikać przycisk tak wiele razy, jak tylko możesz. Każde kliknięcie daje punkty, które są przeliczane na nagrody dodawane do Twojego salda.'
         isPopupOpen.value = true
     }
 

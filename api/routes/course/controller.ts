@@ -146,7 +146,8 @@ export const submitLessonTest = async (req: Request, res: Response) => {
         
         return res.json({ 
             message: `Added ${result.pointsAwarded}`, 
-            userCourse: result.userCourse 
+            userCourse: result.userCourse,
+            pointsAwarded: result.pointsAwarded,
         });
         
     } catch (err: any) {

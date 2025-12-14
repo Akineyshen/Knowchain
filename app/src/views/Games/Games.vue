@@ -30,7 +30,7 @@ const games: GameItem[] = [
 <template>
   <div class="minigames-page">
     <main class="minigames-content">
-      <h1 class="minigames-title">Minigames</h1>
+      <h1 class="minigames-title">Minigry</h1>
 
       <div class="minigames-list">
         <div

@@ -33,7 +33,7 @@ const {
       </template>
 
       <template #center>
-        <div>Pairs</div>
+        <div>Pary</div>
       </template>
 
       <template #right>
@@ -46,7 +46,7 @@ const {
     <main class="pairs-content">
       <div class="pairs-stats">
         <span class="pairs-stats__moves">
-          Collected: {{ moves }}
+          Zebrano: {{ moves }}
         </span>
         <span class="pairs-stats__time">
           {{ timeFormatted }}
@@ -81,7 +81,7 @@ const {
         @click="startGame"
     >
       <span v-if="!isPlaying">
-        {{ hasPlayedToday ? 'Try again tomorrow' : 'Play' }}
+        {{ hasPlayedToday ? 'Spróbuj ponownie jutro' : 'Rozpocznij' }}
       </span>
       <span v-else>
         {{ timeFormatted }}
@@ -92,7 +92,7 @@ const {
         v-model="isPopupOpen"
         :title="popupTitle"
         :description="popupDescription"
-        confirm-text="Got it"
+        confirm-text="Zrozumiano"
         :closeOnConfirm="true"
         :closeOnOverlay="popupMode === 'info'"
     />

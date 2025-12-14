@@ -35,7 +35,7 @@ const getLabelStyle = (angle: number) => ({
       </template>
 
       <template #center>
-        <div>Roulette</div>
+        <div>Ruletka</div>
       </template>
 
       <template #right>
@@ -81,10 +81,10 @@ const getLabelStyle = (angle: number) => ({
         @click="startSpin"
     >
       <span v-if="!isSpinning">
-        {{ hasPlayedToday ? 'Try again tomorrow' : 'Start' }}
+        {{ hasPlayedToday ? 'Spróbuj ponownie jutro' : 'Pozpocznij' }}
       </span>
       <span v-else>
-        Spinning...
+        Kręci się...
       </span>
     </Button>
 
@@ -92,7 +92,7 @@ const getLabelStyle = (angle: number) => ({
         v-model="isPopupOpen"
         :title="popupTitle"
         :description="popupDescription"
-        confirm-text="Got it"
+        confirm-text="Zrozumiano"
         :closeOnConfirm="true"
         :closeOnOverlay="popupMode === 'info'"
     />

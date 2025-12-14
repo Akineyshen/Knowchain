@@ -1,6 +1,6 @@
 // Roulette.ts
 import { ref, computed, onMounted } from 'vue'
-import { useAwardTokens } from "@composables/award/useAwardTokens.ts";
+import { useAwardTokens } from "@/composables/award/useAwardTokens.ts";
 
 type PopupMode = 'info' | 'result'
 
@@ -60,7 +60,7 @@ export function useRouletteGame() {
         } finally {
             isSending.value = false
             popupMode.value = 'result'
-            popupTitle.value = `Congrats! You earned ${reward} points today.`
+            popupTitle.value = `Gratulacje! Zdobyłeś dziś ${reward} punktów.`
             popupDescription.value = ''
             isPopupOpen.value = true
         }

@@ -1,118 +1,70 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 
-interface Question {
-  id: number
+interface QuestionView {
+  id: string
   text: string
   options: string[]
-  correctOptionIndex: number
 }
 
 const props = defineProps<{
-  questions: Question[]
+  questions: QuestionView[]
   currentIndex: number
-  answers: Record<number, number | null>
+  answers: Record<string, number>
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:currentIndex', value: number): void
-  (e: 'update-answer', questionId: number, optionIndex: number): void
+  (e: 'update:current-index', value: number): void
+  (e: 'update-answer', questionId: string, optionIndex: number): void
   (e: 'finish'): void
 }>()
 
-const totalQuestions = computed(() => props.questions.length)
-
-const currentQuestion = computed<Question | null>(() => {
-  if (!props.questions.length) return null
-  return props.questions[props.currentIndex] ?? null
-})
-
-const isLastQuestion = computed(
-    () => props.currentIndex === totalQuestions.value - 1,
+const currentQuestion = computed(() =>
+    props.questions[props.currentIndex] ?? null
 )
 
-const selectedIndex = computed(() => {
+const isLast = computed(
+    () => props.currentIndex === props.questions.length - 1
+)
+
+const selectedIndex = computed<number | null>(() => {
   if (!currentQuestion.value) return null
-  const selected = props.answers[currentQuestion.value.id]
-  return selected === undefined ? null : selected
+  const v = props.answers[currentQuestion.value.id]
+  return typeof v === 'number' ? v : null
 })
 
-const isOptionSelected = computed(() => selectedIndex.value !== null)
-
-// флаг: ответ уже проверен для текущего вопроса
-const isChecked = ref(false)
-
-// сбрасываем checked при смене вопроса
-watch(
-    () => props.currentIndex,
-    () => {
-      isChecked.value = false
-    },
-)
-
-const buttonLabel = computed(() => {
-  if (!isChecked.value) return 'Check answer'
-  return isLastQuestion.value ? 'Finish lesson' : 'Next question'
-})
-
-function selectOption(optionIndex: number) {
+function selectOption(index: number) {
   if (!currentQuestion.value) return
-  emit('update-answer', currentQuestion.value.id, optionIndex)
+  emit('update-answer', currentQuestion.value.id, index)
 }
 
 function goNext() {
-  if (!currentQuestion.value) return
+  if (selectedIndex.value === null) return
 
-  if (!isChecked.value) {
-    if (!isOptionSelected.value) return
-    isChecked.value = true
-    return
-  }
-
-  if (!isLastQuestion.value) {
-    emit('update:currentIndex', props.currentIndex + 1)
-  } else {
+  if (isLast.value) {
     emit('finish')
+  } else {
+    emit('update:current-index', props.currentIndex + 1)
   }
 }
 </script>
 
 <template>
   <div class="lesson-test">
-
     <div v-if="currentQuestion" class="lesson-test__card">
       <h2 class="lesson-test__question">
         {{ currentQuestion.text }}
       </h2>
 
       <ul class="lesson-test__options">
-        <li
-            v-for="(option, index) in currentQuestion.options"
-            :key="option + index"
-        >
+        <li v-for="(opt, i) in currentQuestion.options" :key="i">
           <button
               type="button"
               class="lesson-test__option-btn"
-              :class="{
-              // до проверки — просто выбранный вариант
-              'lesson-test__option-btn--selected':
-                !isChecked &&
-                selectedIndex === index,
-
-              // после проверки: правильный ответ зелёный
-              'lesson-test__option-btn--correct':
-                isChecked &&
-                index === currentQuestion.correctOptionIndex,
-
-              // после проверки: ошибочный выбор красный
-              'lesson-test__option-btn--wrong':
-                isChecked &&
-                selectedIndex === index &&
-                index !== currentQuestion.correctOptionIndex,
-            }"
-              @click="selectOption(index)"
+              :class="{ 'lesson-test__option-btn--selected': selectedIndex === i }"
+              @click="selectOption(i)"
           >
-            {{ option }}
+            {{ opt }}
           </button>
         </li>
       </ul>
@@ -120,15 +72,11 @@ function goNext() {
       <button
           type="button"
           class="lesson-test__next-btn"
-          :disabled="!isOptionSelected && !isChecked"
+          :disabled="selectedIndex === null"
           @click="goNext"
       >
-        {{ buttonLabel }}
+        {{ isLast ? 'Zakończ lekcję' : 'Dalej' }}
       </button>
-    </div>
-
-    <div v-else class="lesson-test__empty">
-      No questions for this lesson yet.
     </div>
   </div>
 </template>

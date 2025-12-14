@@ -1,7 +1,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { toUserFriendlyAddress, type Wallet } from '@tonconnect/sdk'
 import { TonConnectUI } from '@tonconnect/ui'
-import { tonLogin, getMe, type User } from "@/services/authAPI.ts"
+import { tonLogin, getMe, type User } from "@/services/auth.services.ts"
 
 interface TonConnectState {
     wallet: Wallet | null
@@ -28,9 +28,9 @@ export function useTonConnect() {
     const walletAddress = computed(() => state.value.address)
     const currentWallet = computed(() => state.value.wallet)
     const isInitialized = computed(() => state.value.initialized)
-    const user = computed(() => state.value.user) // Геттер для юзера
+    const user = computed(() => state.value.user)
 
-    const manifestUrl = `https://app.knowchain.eu/manifest/tonconnect-manifest.json`
+    const manifestUrl = "https://ton-connect.github.io/demo-dapp-with-react-ui/tonconnect-manifest.json"
 
     const updateWalletState = async (wallet: Wallet | null) => {
         if (!wallet) {
@@ -130,18 +130,20 @@ export function useTonConnect() {
     })
 
     return {
-        // Condition
         isConnected,
         walletAddress,
         currentWallet,
         isInitialized,
         user,
 
-        // Methods
         refreshUser,
         connectWallet,
         disconnectWallet,
         formatAddress,
         initTonConnect,
     }
+}
+
+export function getTonConnectUI() {
+    return tonConnectUI.value
 }

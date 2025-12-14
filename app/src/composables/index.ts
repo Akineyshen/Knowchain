@@ -1,3 +1,6 @@
 export * from './ton'
 export * from './ui'
 export * from './award'
+export * from './course'
+export * from './lesson'
+export * from './user'

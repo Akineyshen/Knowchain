@@ -7,39 +7,61 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update:currentIndex', value: number): void
+  (e: 'update:current-index', value: number): void
   (e: 'complete'): void
 }>()
 
-const hasImages = computed(() => props.images && props.images.length > 0)
+const hasImages = computed<boolean>(() =>
+    Array.isArray(props.images) && props.images.length > 0
+)
 
-const isLast = computed(
-    () => props.currentIndex === props.images.length - 1,
+const safeIndex = computed(() => {
+  if (!hasImages.value) return 0
+  if (props.currentIndex < 0) return 0
+  if (props.currentIndex >= props.images.length) {
+    return props.images.length - 1
+  }
+  return props.currentIndex
+})
+
+const isLast = computed(() =>
+    hasImages.value && safeIndex.value === props.images.length - 1
+)
+
+const currentImage = computed(() =>
+    hasImages.value ? props.images[safeIndex.value] : ''
 )
 
 function handleNext() {
   if (!hasImages.value) return
-  if (props.currentIndex < props.images.length - 1) {
-    emit('update:currentIndex', props.currentIndex + 1)
+
+  if (safeIndex.value < props.images.length - 1) {
+    emit('update:current-index', safeIndex.value + 1)
   } else {
     emit('complete')
   }
 }
 
 function handlePrev() {
-  if (props.currentIndex > 0) {
-    emit('update:currentIndex', props.currentIndex - 1)
+  if (!hasImages.value) return
+
+  if (safeIndex.value > 0) {
+    emit('update:current-index', safeIndex.value - 1)
   }
 }
-
-const currentImage = computed(() =>
-    hasImages.value ? props.images[props.currentIndex] : '',
-)
 </script>
 
 <template>
-  <div class="lesson-stories">
-    <div v-if="hasImages" class="lesson-stories__progress">
+  <div class="lesson-stories" v-if="hasImages">
+    <!-- КАРТИНКА -->
+    <img
+        :src="currentImage"
+        class="lesson-stories__image"
+        alt="Lesson slide"
+    />
+
+    <!-- прогресс -->
+    <div class="lesson-stories__progress">
       <div
           v-for="(image, index) in images"
           :key="image + index"
@@ -48,32 +70,19 @@ const currentImage = computed(() =>
         <div
             class="lesson-stories__progress-bar"
             :class="{
-            'lesson-stories__progress-bar--completed':
-              index < currentIndex,
-            'lesson-stories__progress-bar--active':
-              index === currentIndex,
+            'lesson-stories__progress-bar--completed': index < safeIndex,
+            'lesson-stories__progress-bar--active': index === safeIndex,
           }"
         />
       </div>
     </div>
 
-    <div v-if="hasImages" class="lesson-stories__image-wrapper">
-      <img
-          :src="currentImage"
-          alt="Lesson slide"
-          class="lesson-stories__image"
-      />
-    </div>
-
-    <div v-else class="lesson-stories__empty">
-      No lesson content yet.
-    </div>
-
-    <div v-if="hasImages" class="lesson-stories__controls">
+    <!-- кнопки -->
+    <div class="lesson-stories__controls">
       <button
           type="button"
           class="lesson-stories__nav-btn"
-          :disabled="currentIndex === 0"
+          :disabled="safeIndex === 0"
           @click="handlePrev"
       >
         Previous
@@ -84,10 +93,15 @@ const currentImage = computed(() =>
           class="lesson-stories__nav-btn lesson-stories__nav-btn--primary"
           @click="handleNext"
       >
-        {{ isLast ? 'Test' : 'Next' }}
+        {{ isLast ? 'Test' : 'Dalej' }}
       </button>
     </div>
   </div>
+
+  <div v-else class="lesson-stories__empty">
+    No lesson content yet.
+  </div>
 </template>
+
 
 <style scoped lang="scss" src="./LessonStories.scss" />

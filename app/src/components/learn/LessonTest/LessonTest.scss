@@ -6,6 +6,8 @@
   gap: 18px;
   flex: 1;
   height: 100vh;
+  max-width: 45rem;
+  margin: 0 auto;
 
   &__step {
     font-size: 13px;
@@ -20,7 +22,7 @@
     padding: 5rem 16px 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
   }
 
   &__question {
@@ -50,12 +52,6 @@
     cursor: pointer;
     transition: background 0.12s ease, border-color 0.12s ease,
     transform 0.08s ease;
-
-    &:hover {
-      border-color: rgba(191, 219, 254, 0.9);
-      background: rgba(15, 23, 42, 1);
-      transform: translateY(-1px);
-    }
 
     &--selected {
       border-color: #0894ee;

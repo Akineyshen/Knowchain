@@ -15,9 +15,9 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   closeOnOverlay: true,
-  confirmText: 'Connect wallet',
+  confirmText: 'Połącz portfel',
   showSecondary: false,
-  secondaryText: 'Continue without wallet',
+  secondaryText: 'Kontynuuj bez portfela',
   closeOnConfirm: false
 })
 

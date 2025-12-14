@@ -32,7 +32,7 @@ const {
       </template>
 
       <template #center>
-        <div>Clicker</div>
+        <div>Kliker</div>
       </template>
 
       <template #right>
@@ -68,7 +68,7 @@ const {
         @click="startGame"
     >
       <span v-if="!isPlaying">
-        {{ hasPlayedToday ? 'Try again tomorrow' : 'Start' }}
+        {{ hasPlayedToday ? 'Spróbuj ponownie jutro' : 'Rozpocznij' }}
       </span>
       <span v-else>
         {{ formattedTime }}
@@ -79,7 +79,7 @@ const {
         v-model="isPopupOpen"
         :title="popupTitle"
         :description="popupDescription"
-        confirm-text="Got it"
+        confirm-text="Zrozumiano"
         :closeOnConfirm="true"
         :closeOnOverlay="popupMode === 'info'"
     />

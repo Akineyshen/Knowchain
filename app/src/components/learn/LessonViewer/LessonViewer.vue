@@ -48,11 +48,11 @@ function closeLesson() {
       <img :src="currentImage" alt="Lesson content" />
     </div>
     <div class="navigation">
-      <button @click="prevImage" :disabled="currentIndex === 0">Назад</button>
+      <button @click="prevImage" :disabled="currentIndex === 0">Wstecz</button>
       <span>{{ currentIndex + 1 }} / {{ images.length }}</span>
-      <button @click="nextImage" :disabled="currentIndex === images.length - 1">Вперед</button>
+      <button @click="nextImage" :disabled="currentIndex === images.length - 1">Dalej</button>
     </div>
-    <button @click="closeLesson" class="close-btn">Завершить</button>
+    <button @click="closeLesson" class="close-btn">Zakończ</button>
   </div>
 </template>
 

@@ -5,3 +5,5 @@ export const RESPONSE_MESSAGES = {
   BAD_REQUEST: "Bad request",
   INTERNAL_ERROR: "Internal server error"
 } as const;
+
+export const WITHDRAW_COURSE = 1000

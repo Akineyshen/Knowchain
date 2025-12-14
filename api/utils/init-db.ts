@@ -64,6 +64,17 @@ export async function initDb(): Promise<void> {
       );
     `);
 
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS withdrawals (
+                id SERIAL PRIMARY KEY,
+                user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+                internal_amount INTEGER NOT NULL,
+                tx_hash TEXT NOT NULL UNIQUE,
+                created_at TIMESTAMP DEFAULT now()
+                );
+        `);
+
+
         console.log("initDb: all tables created (or already existed)");
     } catch (err) {
         console.error("initDb error:", err);

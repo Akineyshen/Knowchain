@@ -17,33 +17,33 @@ const {
   walletAddress,
   connectWallet,
   formatAddress,
-  // user — оставляем, но не используем для баланса
+  // user — оставляем, но баланс берём из store
 } = useTonConnect()
 
 const userStore = useUserStore()
 
 const formattedBalance = computed(() => {
-  const balance = userStore.user?.tokens || 0
+  const balance = userStore.user?.tokens ?? 0
   return new Intl.NumberFormat('en-US').format(balance)
 })
 
 const popupTitle = computed(() => {
-  if (popupStep.value === 'intro') return 'Welcome to Knowchain'
-  if (popupStep.value === 'warning') return 'Continue in demo mode?'
-  if (popupStep.value === 'connect') return 'Connect your TON wallet'
+  if (popupStep.value === 'intro') return 'Witamy w Knowchain'
+  if (popupStep.value === 'warning') return 'Chcesz kontynuować bez podłączenia portfela?'
+  if (popupStep.value === 'connect') return 'Połącz swój portfel TON'
   return ''
 })
 
 const popupDescription = computed(() => {
-  if (popupStep.value === 'intro') return 'Link your wallet to save your progress and prevent losing access to your account'
-  if (popupStep.value === 'warning') return 'If you continue without connecting a wallet, you will get only a demo version of the app. Some features, rewards and cross-device progress will not be available'
-  if (popupStep.value === 'connect') return 'Link your TON wallet to unlock full functionality, save your progress and access on-chain features.'
+  if (popupStep.value === 'intro') return 'Połącz swój portfel, aby zachować postępy i zapobiec utracie dostępu do konta.'
+  if (popupStep.value === 'warning') return 'Jeśli zdecydujesz się kontynuować bez podłączenia portfela, wszystkie dane będą przechowywane lokalnie, mogą zostać utracone i nie będzie możliwości zapisania postępów.'
+  if (popupStep.value === 'connect') return 'Połącz swój portfel TON, aby odblokować pełną funkcjonalność, zapisać postępy i korzystać z funkcji on-chain.'
   return ''
 })
 
 const showSecondary = computed(() => popupStep.value === 'intro' || popupStep.value === 'warning')
-const secondaryText = computed(() => 'Continue without wallet')
-const confirmText = computed(() => 'Connect wallet')
+const secondaryText = computed(() => 'Kontynuuj bez portfela')
+const confirmText = computed(() => 'Połącz portfel')
 
 const hasSeenWalletIntro = ref(false)
 
@@ -131,16 +131,12 @@ watch(
   <main class="content">
     <div class="balance-card">
       <div class="logo">
-        <img src="../../../public/logo/logo_dark.svg" style="width: 8rem; height: 7rem" />
+        <img src="../../../public/logo/logo_dark.svg" style="width: 10rem; height: 9rem" />
       </div>
 
       <div class="balance">
         {{ formattedBalance }} KNW
       </div>
-
-      <Button variant="border" as="router-link" to="/ratings">
-        Your rank #57
-      </Button>
     </div>
   </main>
 

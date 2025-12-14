@@ -1,10 +1,12 @@
 import { UserCourse } from "../types/userCourse";
 import { Course } from "../types/course";
 import { Lesson } from "../types/lesson";
+import { UserService } from "./user.service";
 
 import * as courseModel from "../models/course";
 import * as lessonModel from "../models/lesson";
-import * as userModel from "../models/user"; 
+import * as userModel from "../models/user";
+import User from "@/routes/user";
 
 export class CourseService {
 
@@ -26,7 +28,8 @@ export class CourseService {
 
             return {
                 ...course,
-                userStatus: userStatus,
+                userStatus: userStatus ?? 'available',
+                userCourse: userCourse ?? null
             };
         });
     }
@@ -100,51 +103,69 @@ export class CourseService {
 
         return updatedUserCourse;
     }
-    
-    static async submitTestAndAwardPoints(userId: string, courseId: string, lessonId: string, answers: any): Promise<{ pointsAwarded: number, userCourse: UserCourse }> {
-        
+
+    static async submitTestAndAwardPoints(
+        userId: string,
+        courseId: string,
+        lessonId: string,
+        answers: { question_id: string; answer_index: number }[]
+    ) {
         const [userCourse, lesson] = await Promise.all([
             courseModel.getUserCourseByIds(userId, courseId),
-            lessonModel.getLessonById(lessonId)
-        ]);
+            lessonModel.getLessonById(lessonId),
+        ])
 
         if (!userCourse || userCourse.current_lesson_id !== lessonId) {
-            throw new Error("This is not the current lesson or course is not active.");
+            throw new Error('This is not the current lesson')
         }
-        
-        if (!lesson) {
-            throw new Error("Lesson not found.");
-        }
-        
-        // --- TEST LOGIC START ---
-        let correctAnswers = 0;
-        const testQuestions = lesson.test_questions;
-        
-        // (PLACEHOLDER FOR ACTUAL SCORING LOGIC)
-        // You should compare 'answers' with 'testQuestions' and calculate 'correctAnswers'.
-        // Assuming 3 questions max, 1000 points per correct answer.
-        // For now, let's assume the user gets 2000 points for demonstration.
-        
-        correctAnswers = 2; 
-        
-        let pointsAwarded = correctAnswers * 1000;
-        // --- TEST LOGIC END ---
-        
-        const updatedUserCourse = await courseModel.updateUserCourseOnLessonComplete(
-            userId, 
-            courseId, 
-            pointsAwarded
-        );
 
-        return { pointsAwarded, userCourse: updatedUserCourse };
+        if (!lesson) {
+            throw new Error('Lesson not found')
+        }
+
+        let correctAnswers = 0
+
+        for (const a of answers) {
+            const q = lesson.test_questions.find(
+                (tq: any) => String(tq.id) === String(a.question_id)
+            )
+            if (!q) continue
+
+            const correctIndex = q.options.findIndex(
+                opt => opt === q.correct_answer
+            )
+
+            if (a.answer_index === correctIndex) {
+                correctAnswers++
+            }
+        }
+
+        const pointsAwarded = correctAnswers * 1000
+
+        const updatedUserCourse =
+            await courseModel.updateUserCourseOnLessonComplete(
+                userId,
+                courseId,
+                lessonId,
+                pointsAwarded
+            )
+
+        if (pointsAwarded > 0) {
+            await UserService.addTokens(userId, pointsAwarded)
+        }
+
+        return {
+            pointsAwarded,
+            userCourse: updatedUserCourse,
+        }
     }
-    
+
+
     static async getCourseDetails(userId: string, courseId: string): Promise<Course | null> {
         return courseModel.getCourseById(courseId);
     }
     
     static async getLessonsInCourse(courseId: string): Promise<Lesson[]> {
-        // ASSUMES lessonModel.getAllLessonsForCourse IS IMPLEMENTED
         return lessonModel.getAllLessonsForCourse(courseId); 
     }
     

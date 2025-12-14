@@ -21,12 +21,5 @@ export default defineConfig({
           '@': path.resolve(__dirname, './src'),
           '@shared': path.resolve(__dirname, '../shared'),
       },
-    },
-    server: {
-        allowedHosts: [
-            '2dd368dac286.ngrok-free.app',
-            '.ngrok-free.app',
-            '.ngrok.io',
-        ]
     }
 })
