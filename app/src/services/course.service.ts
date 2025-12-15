@@ -1,5 +1,6 @@
 import { useCourseApi } from '@/api'
 import { useUserCourseStore } from '@/stores/useCourseStore'
+import { useAwardTokens } from '@/composables'
 import type { Course, Lesson, UserCourse } from '@/types/api.d'
 
 export class CourseService {
@@ -85,6 +86,9 @@ export class CourseService {
         if (uc) {
             store.setFromApi(uc)
         }
+
+        const { awardTokens } = useAwardTokens()
+        await awardTokens(0)
 
         return res
     }

@@ -78,7 +78,7 @@ export function useRouletteGame() {
                 popupDescription.value = ''
             }
         } catch (e) {
-            console.error('Ошибка отправки результата Pairs', e)
+            console.error('Error Pairs', e)
             popupDescription.value = ''
         }
     }
@@ -110,9 +110,9 @@ export function useRouletteGame() {
 
     function openInfoSheet() {
         popupMode.value = 'info'
-        popupTitle.value = 'Roulette'
+        popupTitle.value = 'Ruletka'
         popupDescription.value =
-            'Spin the wheel once a day to get a random reward from 100 to 800 points. Your prize is converted into rewards for your balance.'
+            'Zakęć kołem raz dziennie, aby otrzymać losową nagrodę od 100 do 800 punktów. Twoja wygrana zostanie przeliczona na nagrody i dodana do salda.'
         isPopupOpen.value = true
     }
 

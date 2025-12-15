@@ -180,7 +180,7 @@ export function usePairsGame() {
                 popupDescription.value = ''
             }
         } catch (e) {
-            console.error('Ошибка отправки результата Pairs', e)
+            console.error('Error  Pairs', e)
             popupDescription.value = ''
         }
     }

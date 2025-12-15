@@ -11,17 +11,17 @@ interface GameItem {
 const games: GameItem[] = [
   {
     id: 'pairs',
-    title: 'Pairs',
+    title: 'Pary',
     route: '/games/pairs'
   },
   {
     id: 'clicker',
-    title: 'Clicker',
+    title: 'Kliker',
     route: '/games/clicker'
   },
   {
     id: 'roulette',
-    title: 'Roulette',
+    title: 'Ruletka',
     route: '/games/roulette'
   }
 ]
@@ -56,7 +56,7 @@ const games: GameItem[] = [
               :to="game.route"
               class="minigames-item__play"
           >
-            Play
+            Graj
           </Button>
         </div>
       </div>
