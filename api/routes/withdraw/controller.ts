@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { withdrawInternalTokens } from '../../services/withdraw.service'
 import { sendJettonTransfer } from '../../ton/sendJettonTransfer'
+import { randomUUID } from 'crypto'
 
 export async function withdrawController(
     req: Request,
@@ -8,13 +9,9 @@ export async function withdrawController(
 ): Promise<Response> {
     try {
         const user = (req as any).user
-        const body = req.body as { internalAmount?: number }
+        const { internalAmount } = req.body
 
-        if (
-            !user ||
-            typeof body.internalAmount !== 'number' ||
-            body.internalAmount < 1000
-        ) {
+        if (!user || typeof internalAmount !== 'number' || internalAmount < 1000) {
             return res.status(400).json({ error: 'Invalid request data' })
         }
 
@@ -22,14 +19,16 @@ export async function withdrawController(
             return res.status(400).json({ error: 'User has no TON address' })
         }
 
+        const requestId = randomUUID()
+
+        // 1️⃣ сначала списываем и фиксируем заявку
+        await withdrawInternalTokens(user.id, internalAmount, requestId)
+
         const jettonAmount =
-            BigInt(Math.floor(body.internalAmount / 1000)) * 10n ** 9n
+            BigInt(Math.floor(internalAmount / 1000)) * 10n ** 9n
 
-        // 1️⃣ отправляем KNW пользователю
+        // 2️⃣ потом отправляем on-chain
         await sendJettonTransfer(user.raw_address, jettonAmount)
-
-        // 2️⃣ списываем внутренние токены
-        await withdrawInternalTokens(user.id, body.internalAmount, 'transfer')
 
         return res.json({ success: true })
     } catch (e: any) {

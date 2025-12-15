@@ -32,10 +32,13 @@ async function request<R = any>(
 
     const fetchOpts: RequestInit = {
         method,
-        credentials: 'include',
         ...opts,
         headers,
-        body: hasBody ? (headers['Content-Type'] === 'application/json' ? JSON.stringify(body) : (body as any)) : undefined
+        body: hasBody
+            ? (headers['Content-Type'] === 'application/json'
+                ? JSON.stringify(body)
+                : (body as any))
+            : undefined
     }
 
     let res: Response

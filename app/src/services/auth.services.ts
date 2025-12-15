@@ -5,13 +5,15 @@ import type { User } from '@/types/api.d'
 const { get, post } = useHttp()
 
 export async function tonLogin(rawAddress: string): Promise<any> {
-    try {
-        const data = await post<any>('/auth/ton-login', { raw_address: rawAddress })
-        return data
-    } catch (err) {
-        throw err
+    const data = await post<any>('/auth/ton-login', { raw_address: rawAddress })
+
+    if (data?.token) {
+        localStorage.setItem('token', data.token)
     }
+
+    return data
 }
+
 
 export async function getMe(): Promise<User | null> {
     try {
